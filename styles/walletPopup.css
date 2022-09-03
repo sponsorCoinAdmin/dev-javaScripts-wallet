@@ -1,0 +1,101 @@
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+#walletPopup_Div {
+  height:500px;
+  width:410px;
+  background-color: yellow;
+}
+
+#walletHeader_Div {
+  height: 70px;
+  background-color: orange;
+}
+
+#walletBody_Div {
+  background-color: green;
+  height: 430px;
+}
+
+.walletBodyContainer {
+   display: none;
+ }
+ 
+/* The popup form - hidden by default */
+.wallet_popup {
+  display: none;
+  position: fixed;
+  top: 10px;
+  border: 3px solid #150a53;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.walletContainer {
+  width: 440px;
+  padding: 10px;
+  background-color: rgb(236, 219, 27);
+}
+
+/* Full-width input fields */
+.walletContainer input[type=text], .walletContainer input[type=password] {
+  width:   100%;
+  padding: 10px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.walletContainer input[type=text]:focus, .walletContainer input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 1px 1px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add a red background color to the cancel button */
+.walletContainer .cancel {
+  background-color: red;
+}
+
+/* Add some hover effects to buttons */
+.walletContainer .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+div.scroll {
+  margin:2px, 2px;
+  padding:10px;
+  background-color: rgb(39, 80, 111);
+  width: 100%;
+  height: 92%;
+  overflow-x: auto;
+  overflow-y: auto;
+}
+
+.float-left{
+	float: left;	
+}
+
+.float-right{
+  background-color: rgb(239, 160, 95);
+	float: right;
+}
+
+H2 {
+	text-align: center;
+  height: 27px;
+  color: black;
+  font-family: Helvetica;
+}

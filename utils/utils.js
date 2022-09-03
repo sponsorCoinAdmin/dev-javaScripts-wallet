@@ -2,9 +2,19 @@ function changeElementIdColor(name, color) {
   document.getElementById(name).style.backgroundColor = color;
 }
 
-function isEmptyObj(object) {
-  isEmpty = JSON.stringify(object) === "{}";
+function isEmpty(obj) {
+  var isEmpty = false;
+  if (obj == null || obj == undefined || obj == "")
+    isEmpty = true;
+  else
+    isEmpty = JSON.stringify(obj) === "{}";
   return isEmpty;
+
+//   if (obj == null || obj == undefined || obj == "")
+//   return true;
+// else
+//   return false;
+
 }
 
 function processError(err) {
@@ -12,15 +22,21 @@ function processError(err) {
   throw err;
 }
 
-function disconnectContract() {
-  this.contractAddress = undefined;
-  this.contract = undefined;
+class disconnectContract {
+  constructor() {
+    this.contractAddress = undefined;
+    this.contract = undefined;
+  }
 }
 
 function alertLogError(err, element) {
-  console.log(err.message);
+  alertLogErrorMessage(err.message);
   changeElementIdColor(element, "red");
-  alert(err.message);
+}
+
+function alertLogErrorMessage(msg) {
+  console.log(msg);
+  alert(msg);
 }
 
 function changeElementIdColor(name, color) {
@@ -28,7 +44,7 @@ function changeElementIdColor(name, color) {
 }
 
 function toggle(elmtStr) {
-  elmtObj = document.getElementById(elmtStr);
+  var elmtObj = document.getElementById(elmtStr);
   if (elmtObj.style.display === "none") {
     elmtObj.style.display = "block";
   } else {
@@ -36,43 +52,46 @@ function toggle(elmtStr) {
   }
 }
 
-function WEB_isEmptyObj(object) {
-  isEmpty = JSON.stringify(object) === "{}";
-  return isEmpty;
-}
-
 function weiToToken(wei, decimals) {
-  mod = 10 ** decimals;
-  tokens = wei / mod;
-  //    alert ("\nwei = " + wei + "\n mod = " + mod + "\ntokens = " + tokens);
-
+  var mod = 10 ** decimals;
+  var tokens = wei / mod;
   return tokens;
 }
 
-function c(tokens, decimals) {
-  mod = 10 ** decimals;
-  wei = tokens * mod;
-  //    alert ("\ntokens = " + tokens + "\n wei = " + wei + "\nwei = " + wei);
-
-  strNum = expToString(wei);
+function tokensToWei(tokens, decimals) {
+  var mod = 10 ** decimals;
+  var wei = tokens * mod;
   return wei;
 }
 
-function expToString(expNum) {
-  var data = String(expNum).split(/[eE]/);
-  if (data.length == 1) return data[0];
+function clearFields() {
+  document.onclicklocation.reload(true);
+}
 
-  var z = "",
-    sign = this < 0 ? "-" : "",
-    str = data[0].replace(".", ""),
-    mag = Number(data[1]) + 1;
+function popUpWindowCenter(id) {
+  activateMenuDiv(id);
+  setWindowCentre(id);
+}
 
-  if (mag < 0) {
-    z = sign + "0.";
-    while (mag++) z += "0";
-    return z + str.replace(/^\-/, "");
-  }
-  mag -= str.length;
-  while (mag--) z += "0";
-  return str + z;
+
+function popupAddTokenForm(tokenSelect) {
+  // alert("Add Token Form To Go Here");
+  setWindowCentre("wallet_Popup_Div");
+}
+
+function setWindowCentre(id) {
+  var popupDiv = document.getElementById(id);
+
+  var windowCenterWidth = window.innerWidth / 2;
+  var windowCenterHeight = window.innerHeight / 2;
+
+  var popupCenterWidth = popupDiv.clientWidth;
+  var popupCenterHeight = popupDiv.clientHeight;
+
+  var leftWindowMargin = windowCenterWidth - (popupCenterWidth / 2);
+  var topWindowMargin = windowCenterHeight - (popupCenterHeight / 2);
+
+  // popupDiv.style.top = topWindowMargin+"px";
+  popupDiv.style.top = "60px";
+  popupDiv.style.right = leftWindowMargin+"px";
 }
