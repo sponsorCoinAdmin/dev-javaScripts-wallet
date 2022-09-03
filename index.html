@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="./styles.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SponsorCoin.js</title>
+  </head>
+
+  <body> 
+    <ul>
+      <li><a href="#home">WALLET</a></li>
+      <li><a href="#news">ACCOUNTS</a></li>
+      <li class="dropdown">
+        <a href="javascript:void(0)" class="dropbtn">CONTRACT CALLS</a>
+        <div class="dropdown-content">
+          <a href="#">Link 1</a>
+          <a href="#">Link 2</a>
+          <a href="#">Link 3</a>
+        </div>
+      </li>
+      <li><a href="#news">REBASE</a></li>
+      <li><a href="#news">SPONSORS</a></li>
+      <li><a href="#news">SETTINGS</a></li>
+      <li><a href="#news">ABOUT</a></li>
+    </ul>
+
+    <h3>Sponsor Coin</h3>
+    <table>
+      <tbody id="connectWallet_TBL">
+        <tr>
+          <th>Wallet Calls</th>
+          <th class="addr">Parameters</th>
+          <td class="spacer"></td>
+          <th>Test Account</th>
+          <th class="addr">Test Address</th>
+        </tr>
+        <tr>
+          <td>
+            <button
+              id="connectWallet_BTN"
+              class="cell_BTN"
+              onclick="GUI_connectWallet(this.id, document.getElementById('connectWallet_TX').value)">
+              Connect Wallet
+            </button>
+          </td>
+          <td><input type="text" id="connectWallet_TX" value="METAMASK" /></td>
+          <td class="spacer"></td>
+          <td>SponsorCoin Contract</td>
+          <td>0x334710ABc2Efcc3DF2AfdA839bF8d0dA923dB36A</td>
+        </tr>
+        <tr>
+          <th>Account Calls</th>
+          <td class="addr"></td>
+          <td class="spacer"></td>
+          <td>Meta Mask Account 1</td>
+          <td>0x4F75f07232a56c2b98FC9878F496bFc32e317Ace</td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              id="activeAccount_BTN"
+              class="cell_BTN"
+              onclick="GUI_getActiveAccount(this.id)">
+              Active Account
+            </button>
+          </td>
+          <td><input type="text" id="activeAccount_TX" /></td>
+          <td class="spacer"></td>
+          <td>Meta Mask Ledger 1</td>
+          <td>0xFAbed8e2f3a29aEE5002087F1140Ef4C6ACa25B4</td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              id="ethereumAccountBalance_BTN"
+              class="cell_BTN"
+              onclick="GUI_getEthereumAccountBalance(this.id)">
+              Ethereum Account Balance
+            </button>
+          </td>
+          <td><input type="text" id="ethereumAccountBalance_TX" /></td>
+          <td class="spacer"></td>
+          <td>Meta Mask Ledger 2</td>
+          <td>0x1EFFDE4A0e5eEcF79810Dd39f954A515ab962D63</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table id="account_TBL">
+      <tbody>
+        <tr>
+          <th>Contract Calls</th>
+          <td class="addr"></td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              id="connectContract_BTN"
+              class="cell_BTN"
+              onclick="GUI_connectContract(this.id, document.getElementById('connectContract_TX').value)">
+              Connect Contract Address
+            </button>
+          </td>
+          <td><input type="text" id="connectContract_TX" value="0x334710ABc2Efcc3DF2AfdA839bF8d0dA923dB36A" /></td>
+          <td>
+            <button
+              id="contractData_BTN"
+              class="cell_BTN"
+              onclick="toggle('myDIV')">
+              Read Contract Data
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="myDIV">
+      <table id="contract_TBL">
+        <tbody>
+          <tr>
+            <td>
+              <button
+                id="contractName_BTN"
+                class="cell_BTN"
+                onClick="GUI_readContractName(this.id);">
+                Contract Name
+              </button>
+            </td>
+            <td><input type="text" id="contractName_TX" /></td>
+          </tr>
+
+          <tr>
+            <td>
+              <button
+                id="contractSymbol_BTN"
+                class="cell_BTN"
+                onclick="GUI_readContractSymbol(this.id)">
+                Contract Symbol
+              </button>
+            </td>
+            <td><input type="text" id="contractSymbol_TX" /></td>
+          </tr>
+
+          <tr>
+            <td>
+              <button
+                id="contractTotalSupply_BTN"
+                class="cell_BTN"
+                onclick="GUI_readContractTotalSupply(this.id)">Contract Total Supply
+              </button>
+            </td>
+            <td><input type="text" id="contractTotalSupply_TX" /></td>
+          </tr>
+
+          <tr>
+            <td>
+              <button
+                id="contractDecimals_BTN"
+                class="cell_BTN"
+                onclick="GUI_readContractDecimals(this.id)">
+                Contract Decimals
+              </button>
+             </td>
+            <td><input type="text" id="contractDecimals_TX" /></td>
+          </tr>
+          <tr>
+            <td>
+              <button
+                id="contractTokenSupply_BTN"
+                class="cell_BTN"
+                onclick="GUI_readContractTokenSupply(this.id)">
+                Account Token Supply>
+              </button>
+            </td>
+            <td><input type="text" id="contractTokenSupply_TX" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <table id="action_TBL">
+      <tbody>
+        <tr>
+          <td>
+            <button
+              id="balanceOf_BTN"
+              class="cell_BTN"
+              onclick="GUI_balanceOf(this.id)">
+              Account Token balance
+            </button>
+          </td>
+          <td><input type="text" id="balanceOf_TX" /></td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              id="AccountTokenBalance_BTN"
+              class="cell_BTN"
+              onclick="GUI_getAccountTokenBalance(this.id)">
+              Account Token balance
+            </button>
+          </td>
+          <td><input type="text" id="AccountTokenBalance_TX" /></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <table id="action_TBL">
+    <tbody>
+      <tr>
+        <th>Contract Transaction</th>
+        <td class="addr"></td>
+      </tr>
+
+      <tr>
+        <td>
+          <button id="sendToAccount_BTN" class="cell_BTN" onclick="GUI_sendTokensToAccount(this.id, 
+            document.getElementById('sendToAccountAddr_TX').value, 
+            document.getElementById('tokenAmount_TX').value)">
+            Send Tokens To Account
+          </button>
+        </td>
+        <td><input type="text" id="sendToAccountAddr_TX" /></td>
+        <td class="spacer"></td>
+        <td>Amount</td>
+        <td><input type="text" id="tokenAmount_TX" /></td>
+      </tr>
+      <tr>
+        <td>
+          <button id="ReadFromScConctractStorage_BTN" class="cell_BTN"
+            onclick="GUI_readFromScConctractStorage(this.id)">
+            readFromScConctractStorage
+          </button>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>
+          <button class="cell_BTN" onclick="document.location.reload(true)">
+            Clear Fields
+          </button>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+
+    <button
+      onclick="document.location.reload(true);">Reload Page</button>
+
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+<!---->
+   <script src="utils/utils.js" type="application/javascript"></script>
+<!---->
+   <script src="contract/spCoinABI.js" type="application/javascript"></script>
+   <script src="contract/contract.js" type="application/javascript"></script>
+   <script src="wallet/wallet.js" type="application/javascript"></script>
+   <script src="wallet/WEB_Wallet.js" type="application/javascript"></script>
+    <script
+      src="contract/WEB_Contract.js"
+      type="application/javascript"
+
+    ></script>
+  </body>
+</html>

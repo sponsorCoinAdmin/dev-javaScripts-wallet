@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Ethers.js</title>
+</head>
+<body>
+    <button onclick="connectContract()">Connect Contract Address</button>
+    <input type="text" id="contractText" size="80" value="Contract Address">
+    <BR>
+    <button onclick="connectMetamask()">Connect Metamask Account</button>
+    <input type="text" id="connectText" size="80" value="Connect Address">
+    <BR>
+    <button onclick="getWalletEthBalance()">Get Wallet Ethereum Balance</button>
+    <input type="text" id="balanceText" size="80" value="Ethereum Balance">
+    <BR>
+        <button onclick="readDataFromUSDTContract()">readDataFromUSDTContract</button>
+    <BR>
+    <DIV id="usdtData">Data From USDT Contract</DIV>
+    <button onclick="readDataFromSpCoinContract()">readDataFromSpCoinContract</button>
+    <BR>
+    <DIV id="spCoinData">Data From spCoin Contract</DIV>
+
+    <!-- ######################################################################################## -->
+    <button onclick="balanceOf()">balanceOf</button>
+    <input type="text" id="addressText" size="80" value="Address Required">
+    <BR>
+    <DIV id="balanceOfData">Balance</DIV>
+    <!-- ######################################################################################## -->
+
+    <button onclick="sendUsdtToAccount()">sendUsdtToAccount</button>
+    <input type="text" id="sendUSDTText" size="80" value="Address">
+    <BR>
+    <button onclick="sendSPCoinToAccount()">sendSPCoinToAccount</button>
+    <input type="text" id="sendUSDTText" size="80" value="Address">
+    <BR>
+    <button onclick="deployContract()">deployContract</button>
+    <BR>
+    <button onclick="incrementNumberOnSmartContract()">incrementNumberOnSmartContract</button>
+    <BR>
+    <button onclick="emitAnEvent()">emitAnEvent</button>
+    <BR>
+    <button onclick="listenToEvents()">listenToEvents</button>
+    <BR>
+    <button onclick="sendEtherWhenCallingFunction()">sendEtherWhenCallingFunction</button>
+    <BR>
+    <button onclick="readFromSCOnctractStorage()">readFromSCOnctractStorage</button>
+    <BR>
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        type="application/javascript"></script>
+    <script src="oldIndex.js"></script>
+</body>
+</html>
