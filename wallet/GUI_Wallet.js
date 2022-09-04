@@ -7,9 +7,9 @@ var elementToCheckIfClicksAreInsideOf = document.querySelector('#wallet_Popup_Di
 // Listen for click events on body
 document.addEventListener('click', function (event) {
     if (elementToCheckIfClicksAreInsideOf.contains(event.target)) {
-        document.log('clicked inside');
+        console.log('clicked inside');
     } else {
-      document.log('clicked outside');
+      console.log('clicked outside');
     }
 });
 
