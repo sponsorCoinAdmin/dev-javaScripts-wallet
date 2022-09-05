@@ -33,15 +33,15 @@ class TokenMap {
     return objMap;
   }
 
-  mapWalletObjectByAddressKey(obj) {
-    var addressKey = obj.address;
-    var name = obj.name;
-    var symbol = obj.symbol;
-    var totalSupply = obj.totalSupply;
-    var decimals = obj.decimals;
-    var tokenSupply = obj.tokenSupply;
+  mapWalletObjectByAddressKey(walletObj) {
+    var addressKey = walletObj.address;
+    var name = walletObj.name;
+    var symbol = walletObj.symbol;
+    var totalSupply = walletObj.totalSupply;
+    var decimals = walletObj.decimals;
+    var tokenSupply = walletObj.tokenSupply;
 
-    this.setTokenProperty(addressKey, "contract",    obj);
+    this.setTokenProperty(addressKey, "contract",    walletObj);
     this.setTokenProperty(addressKey, "name",        name);
     this.setTokenProperty(addressKey, "symbol",      symbol);
     this.setTokenProperty(addressKey, "totalSupply", totalSupply);

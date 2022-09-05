@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="./styles/walletPopup.css" />
-<script src="Wallet/GUI_Wallet.js" type="application/javascript"></script>
+<!-- <script src="pages/wallet/GUI_Wallet.js" type="application/javascript"></script> -->
 
-<div id="wallet_Popup_Div">
+<div id="walletPopup_Div">
   <div id="walletHeader_Div">
     <div id="addContract_Div">
       <button id="connectWallet_BTN" class="cell_BTN walletHeaderContainer" onclick="GUI_connectWallet(this.id, 'METAMASK')">
@@ -9,7 +9,7 @@
       </button>
     </div>
     <div id="selector_Div" class="walletHeaderContainer">
-      <select id="tokenContract_SEL" class="cell_BTN">
+      <select id="tokenContract_SEL" class="cell_BTN" onchange="selectedTokenChanged()">
         <option value="" selected="selected">Inport Token</option>
       </select>
     </div>
@@ -35,6 +35,9 @@
     </div>
     <div id="contract_DIV" class="walletBodyContainer">
       <H2 id="Contract_Header" class="text-center"><b>Contract Symbol</b></H2>
+
+      <label id="contractAddress_LBL"><b>Wei balance</b></label>
+      <input type="text" id="contractAddress_TX" />
 
       <label id="contractWeiSupply_LBL"><b>Wei balance</b></label>
       <input type="text" id="contractWeiSupply_TX" />

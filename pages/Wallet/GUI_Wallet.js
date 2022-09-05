@@ -3,12 +3,12 @@ var tm;
 var ts;
 var activePage = "home";
 // Get arbitrary element with id "my-element"
-var elementToCheckIfClicksAreInsideOf = document.querySelector('#wallet_Popup_Div');
+var elementToCheckIfClicksAreInsideOf = document.querySelector('#walletPopup_Div');
 // Listen for click events on body
 document.addEventListener('click', function (event) {
-    if (elementToCheckIfClicksAreInsideOf.contains(event.target)) {
-        console.log('clicked inside');
-    } else {
+  if (elementToCheckIfClicksAreInsideOf.contains(event.target)) {
+    console.log('clicked inside');
+  } else {
       console.log('clicked outside');
     }
 });
@@ -19,11 +19,11 @@ document
 
 function GUI_initPage() {
   clearContractFields();
-  document.getElementById("wallet_Popup_Div").style.display = "none";
+  document.getElementById("walletPopup_Div").style.display = "none";
   window.addEventListener(
     "resize",
     function (event) {
-      setWindowCentre("wallet_Popup_Div");
+      setWindowCentre("walletPopup_Div");
     },
     true
   );
@@ -101,12 +101,12 @@ async function GUI_getEthereumAccountBalance(id) {
 */
 
 function GUI_OpenPopupWallet() {
-  document.getElementById("wallet_Popup_Div").style.display = "block";
-  setWindowCentre("wallet_Popup_Div");
+  document.getElementById("walletPopup_Div").style.display = "block";
+  setWindowCentre("walletPopup_Div");
 }
 
 function GUI_ClosePopupWallet(selectId) {
-  document.getElementById("wallet_Popup_Div").style.display = "none";
+  document.getElementById("walletPopup_Div").style.display = "none";
   ts.rebaseSelected();
 }
 
@@ -143,7 +143,6 @@ function selectedTokenChanged() {
 }
 
 async function getAccountBalanceOf(contract, contractAddress, id_TX) {
-  alert("getAccountBalanceOf");
   var element = document.getElementById(id_TX);
   var promiseBalanceOf = await contract.balanceOF(contractAddress);
   id_TX.value = promiseBalanceOf.value();
