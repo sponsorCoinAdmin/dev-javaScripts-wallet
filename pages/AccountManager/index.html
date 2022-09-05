@@ -1,61 +1,61 @@
 <link rel="stylesheet" href="./styles/popup.css" />
 <script src="wallet/WEB_Wallet.js" type="application/javascript"></script>
 
-<div id="popup_Header_Div">
-  <div id="addContract_Div">
+<div>
+  <div>
     <H1>Account Manager</H1>
-    <button id="connectWallet_BTN" class="cell_BTN" onclick="GUI_connectWallet(this.id, 'METAMASK')">
+    <button class="cell_BTN" onclick="GUI_connectWallet(this.id, 'METAMASK')">
       Connect Wallet
     </button>
   </div>
-  <div id="selector_Div" class="walletSubContainer">
-    <select id="tokenAccoint_SEL" class="cell_BTN">
+  <div class="walletSubContainer">
+    <select class="cell_BTN">
       <option value="" selected="selected">ZZZ Inport Token</option>
     </select>
   </div>
 </div>
-<div id="popup_Body_Div" class="scroll">
-  <div class="walletSubContainer" id="inportTokens_DIV">
+<div class="scroll">
+  <div class="walletSubContainer">
     <th>Inport Token</th>
-    <input type="text" id="tokenContract_ADR" />
-    <button id="tokenContract_BTN" class="cell_BTN" onclick="GUI_AddTokenContract(this.id)">
-      Add Token
+    <input type="text"/>
+    <button class="cell_BTN" onclick="GUI_AddTokenContract(this.id)">
+      Add Account
     </button>
   </div>
-  <div id="transaction_Div" class="walletSubContainer">
-    <button id="sendToAccount_BTN" class="cell_BTN" onclick="GUI_sendTokensToAccount(this.id, 
+  <div class="walletSubContainer">
+    <buttonclass="cell_BTN" onclick="GUI_sendTokensToAccount(this.id, 
                     document.getElementById('sendToAccountAddr_TX').value, 
                     document.getElementById('tokenAmount_TX').value)">
       Send Tokens To Account
     </button>
-    <input type="text" id="sendToAccountAddr_TX" />
+    <input type="text"/>
   </div>
-  <form class="walletSubContainer" id="walletContainer_FORM">
+  <form class="walletSubContainer">
     <label for="address"><b>Token Contract Address</b>
-      <button id="send_BTN" class="float-right" onclick="showElementById('transaction_Div');">Send</button>
+      <button class="float-right" onclick="showElementById('transaction_Div');">Send</button>
     </label>
-    <input type="text" id="contractAddress_TX" />
+    <input type="text"/>
 
     <label for="name"><b>Token Contract Name</b></label>
-    <input type="text" id="contractName_TX" />
+    <input type="text"/>
 
     <label for="psw"><b>Contract Symbol</b></label>
-    <input type="text" id="contractSymbol_TX" />
+    <input type="text"/>
 
     <label for="totalSupply"><b>Total Supply</b></label>
-    <input type="text" id="contractTotalSupply_TX" />
+    <input type="text"/>
 
     <label for="decimals"><b>Decimals</b></label>
-    <input type="text" id="contractDecimals_TX" />
+    <input type="text"/>
 
     <label for="decimals"><b>Token Supply</b></label>
-    <input type="text" id="contractTokenSupply_TX" />
+    <input type="text"/>
 
     <label for="balanceOf"><b>Account Wei balance</b></label>
-    <input type="text" id="contractWeiSupply_TX" />
+    <input type="text"/>
 
     <label for="balanceOf"><b>Account Token balance</b></label>
-    <input type="text" id="contractTokenSupply_TX" />
+    <input type="text"/>
 
     <button type="submit" class="btn">Validate Token Contract</button>
     <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Save
