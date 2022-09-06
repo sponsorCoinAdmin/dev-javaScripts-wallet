@@ -4,7 +4,8 @@
 <div id="walletPopup_Div">
   <div id="walletHeader_Div">
     <div id="addContract_Div">
-      <button id="connectWallet_BTN" class="cell_BTN walletHeaderContainer" onclick="GUI_connectWallet(this.id, 'METAMASK')">
+      <button id="connectWallet_BTN" class="cell_BTN walletHeaderContainer"
+        onclick="GUI_connectWallet(this.id, 'METAMASK')">
         Connect Wallet
       </button>
     </div>
@@ -22,7 +23,7 @@
         Add Token
       </button>
     </div>
-    <div id="WalletAdmin_Div"class="walletBodyContainer">
+    <div id="WalletAdmin_Div" class="walletBodyContainer">
       <H1>Admin Div</H1>
     </div>
     <div id="walletTransaction_DIV" class="walletBodyContainer">
@@ -52,19 +53,20 @@
       <input type="text" id="accountBalanceOf_TX" />
 
     </div>
-    <div class="buttons">
-      <button id="accountData">Account Data</button>
-      <button id="contractData">Contract Data</button>
-      <button id="inportToken">Inport Token</button>
-      <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
-    </div>
-    <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Close Wallet</button>
     <div id="account_DIV" class="walletBodyContainer">
       <label id="decimals"><b>Token Supply</b></label>
       <input type="text" id="contractTokenSupply_TX" />
-      
+
       <label id="totalSupply"><b>Total Supply</b></label>
       <input type="text" id="contractTotalSupply_TX" />
     </div>
+  </div>
 
+  <div class="buttons">
+    <button id="accountData" onclick="activateWalletBodyDiv('token_DIV')">Account Data</button>
+    <button id="contractData" onclick="activateWalletBodyDiv('contract_DIV')">Contract Data</button>
+    <button id="inportToken" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
+    <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
+  </div>
+  <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Close Wallet</button>
 </div>
