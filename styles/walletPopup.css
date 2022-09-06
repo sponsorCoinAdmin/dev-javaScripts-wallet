@@ -9,13 +9,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
 
 #walletHeader_Div {
   height: 70px;
-  width:   99%;
+  width:   100%;
   background-color: orange;
 }
 
 #walletBody_Div {
   background-color: green;
-  width:   99%;
+  width:   100%;
   height: 360px;
 }
 
@@ -118,4 +118,22 @@ H2 {
 /* makeup*/
 .buttons {
   padding: 10px;
+}
+
+.cell_BTN {
+  background-color: #5482c7;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  width:100%; 
+  height:100%;
+  font-size: 16px;
+  margin: 4px 0px;
+
+  /* 
+  color: white;
+  padding: 3px 8px;
+  text-decoration: none;
+  cursor: pointer;
+  */
 }

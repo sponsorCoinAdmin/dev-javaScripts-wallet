@@ -2,17 +2,4 @@ body {
    background-color:white;
  }
 
-.cell_BTN {
-   background-color: #5482c7;
-   border: none;
-   color: white;
-   padding: 3px 8px;
-   text-align: center;
-   text-decoration: none;
-   display: inline-block;
-   font-size: 16px;
-   margin: 4px 2px;
-   cursor: pointer;
-   height:100%;
-   width:100%;
- }
+
