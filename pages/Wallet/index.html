@@ -36,7 +36,7 @@
     <div id="contract_DIV" class="walletBodyContainer">
       <H2 id="Contract_Header" class="text-center"><b>Contract Symbol</b></H2>
 
-      <label id="contractAddress_LBL"><b>Wei balance</b></label>
+      <label id="contractAddress_LBL"><b>Token Address</b></label>
       <input type="text" id="contractAddress_TX" />
 
       <label id="contractWeiSupply_LBL"><b>Wei balance</b></label>
@@ -51,11 +51,14 @@
       <label id="accountBalanceOf_LBL"><b>Account BalanceOf</b></label>
       <input type="text" id="accountBalanceOf_TX" />
 
-      <button type="submit" class="btn">Validate Token Contract</button>
-      <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Close Wallet</button>
-      <button id="send_BTN" class="float-right" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Send</button>
-
     </div>
+    <div class="buttons">
+      <button id="accountData">Account Data</button>
+      <button id="contractData">Contract Data</button>
+      <button id="inportToken">Inport Token</button>
+      <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
+    </div>
+    <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Close Wallet</button>
     <div id="account_DIV" class="walletBodyContainer">
       <label id="decimals"><b>Token Supply</b></label>
       <input type="text" id="contractTokenSupply_TX" />

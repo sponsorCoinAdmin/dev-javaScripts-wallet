@@ -56,26 +56,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
   outline: none;
 }
 
-/* Set a style for the submit/login button */
-.btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 1px 1px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
 /* Add a red background color to the cancel button */
 .walletContainer .cancel {
   background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.walletContainer .btn:hover, .open-button:hover {
-  opacity: 1;
 }
 
 div.scroll {
@@ -102,4 +85,37 @@ H2 {
   height: 27px;
   color: black;
   font-family: Helvetica;
+}
+
+
+/* Set a style for the submit/login button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 1px 1px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add some hover effects to buttons */
+.walletContainer .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.buttons {
+  background-color: #04AA6D;
+  text-align:justify;
+}
+
+.buttons:after {
+  content:'';
+  width:100%;
+}
+
+/* makeup*/
+.buttons {
+  padding: 10px;
 }
