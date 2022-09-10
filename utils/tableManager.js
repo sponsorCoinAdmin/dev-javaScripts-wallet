@@ -19,15 +19,12 @@ function addTableRow(tableId, addrKey) {
     var contract = tm.getTokenProperty(addrKey, "contract");
     addressMap.set(addrKey, contract);
     var table = document.getElementById(tableId);
-    var tokenName = tm.getTokenProperty(addrKey, "name");
     var tokenSymbol = tm.getTokenProperty(addrKey, "symbol");
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    cell1.innerHTML = tokenName;
-    cell2.innerHTML = tokenSymbol;
-    cell3.innerHTML = addrKey;
+    cell1.innerHTML = tokenSymbol;
+    cell2.innerHTML = addrKey;
     return true;
   }
   return false;
