@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="./styles/table.css" />
 <table id="testTable">
   <tr>
-    <th>Token</th>
-    <th>Symbol</th>
-    <th>Address</th>
+    <th onclick="sortTable('testTable', 0)">Token</th>
+    <th onclick="sortTable('testTable', 1)">Symbol</th>
+    <th onclick="sortTable('testTable', 2)">Address</th>
   </tr>
   <tr>
     <td>Ethereum</td>
@@ -40,13 +40,19 @@
 <p>
   <button type="button" onclick="addNewTestToken('testTable')">Add Token</button>
   <input type="text" id="newTokenAddress_TX" />
-  <button onclick="sortTable('testTable')">Sort</button>
-  <button type="button" onclick="loadTokensFromTable('testTable', 0)">Load Test Data</button>
+  <button type="button" onclick="loadContractsFromTable('testTable', 2)">Load Test Data</button>
 </p>
 
 <script>
-  function loadTokensFromTable(tableId) {
-    contracts = loadColumnValuesAsSet(tableId, 0);
+  function loadContractsFromTable(tableId, colIdx) {
+    var contracts = loadColumnValuesAsSet(tableId, colIdx);
     loadContractsFromSet(contracts);
+  }
+
+  function loadContractsFromSet(contracts) {
+    for (const addr of contracts.values()) {
+      // alert(addr)
+      addContractAddress(addr);
+    }
   }
 </script>

@@ -54,16 +54,18 @@
 
     </div>
     <div id="accounts_DIV" class="walletBodyContainer">
-      <label id="decimals"><b>Token Supply</b></label>
-      <input type="text" id="contractTokenSupply_TX" />
-
-      <label id="totalSupply"><b>Total Supply</b></label>
-      <input type="text" id="contractTotalSupply_TX" />
+      <table id="assetsTable">
+        <tr>
+          <th onclick="sortTable('assetsTable', 0)">Token</th>
+          <th onclick="sortTable('assetsTable', 1)">Symbol</th>
+          <th onclick="sortTable('assetsTable', 2)">Address</th>
+        </tr>
+      </table>
     </div>
   </div>
 
   <div class="buttons">
-    <button id="accountData" onclick="activateWalletBodyDiv('accounts_DIV')">Account Data</button>
+    <button id="accountData" onclick="activateWalletBodyDiv('accounts_DIV')">Assets</button>
     <button id="contractData" onclick="activateWalletBodyDiv('contract_DIV')">Contract Data</button>
     <button id="inportToken" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
     <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>

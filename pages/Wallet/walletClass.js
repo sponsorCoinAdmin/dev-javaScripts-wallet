@@ -36,7 +36,6 @@ class Wallet {
   }
 
   async getContractMapByAddressKey(_addressKey) {
-    var addressObject;
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
     // check if contract exists

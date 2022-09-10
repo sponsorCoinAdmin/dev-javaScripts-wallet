@@ -49,21 +49,23 @@ async function GUI_AddTokenContract(id) {
     var tokenSelectorStr = id.replace("_BTN", "_SEL");
     var tokenSelector = document.getElementById(id.replace("_BTN", "_SEL"));
     var addressKey = document.getElementById(id.replace("_BTN", "_ADR")).value;
-    contractMap = await wallet.getContractMapByAddressKey(addressKey);
-    ts.mapWalletToSelector(wallet);
-    // ts.AddTokenContract(addressKey);
-
-    // var opt = tokenSelector.options;
-    // var optionLength = opt.length;
-    // var tokenSymbol = contractMap.get("symbol");
-    // tokenSelector.options[tokenSelector.options.length] = new Option(tokenSymbol, addressKey)
-    // // alert("Validating Token Contract " + addressKey);
-
+    contractMap = await addContractAddress(addressKey);
     changeElementIdColor(id, "green");
   } catch (err) {
     document.getElementById(id.replace("_BTN", "_TX")).value = "";
     alertLogError(err, id);
   }
+}
+
+async function addContractAddress(addrKey) {
+  try {
+    contractMap = await wallet.getContractMapByAddressKey(addrKey);
+    ts.mapWalletToSelector(wallet);
+    addTableRow("assetsTable", addrKey);
+  } catch (err) {
+    alertLogError(err, addrKey);
+  }
+  return contractMap;
 }
 
 // 2. Connect Active Account

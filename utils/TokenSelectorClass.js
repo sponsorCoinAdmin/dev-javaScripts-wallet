@@ -45,7 +45,6 @@ class TokenSelectorClass {
         this.setSelectedTokenIndex(this.lastTokenIndex);
     }
 
-
     AddTokenContract(_address) {
         var x = this.tm;
         var a = _address
