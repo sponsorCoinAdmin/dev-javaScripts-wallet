@@ -65,9 +65,10 @@
 
   <div class="buttons">
     <button id="accountData" onclick="activateWalletBodyDiv('accounts_DIV')">Assets</button>
-    <button id="contractData" onclick="activateWalletBodyDiv('contract_DIV')">Contract Data</button>
+    <!-- <button id="contractData" onclick="activateWalletBodyDiv('contract_DIV')">Contract Data</button> -->
     <button id="inportToken" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
     <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
+    <button type="button" onclick="loadContractsFromTable('testTable', 2)">Load Test Data</button>
   </div>
   <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Close Wallet</button>
 </div>

@@ -20,14 +20,49 @@ function addTableRow(tableId, addrKey) {
     addressMap.set(addrKey, contract);
     var table = document.getElementById(tableId);
     var tokenSymbol = tm.getTokenProperty(addrKey, "symbol");
+    var tokenSupply = tm.getTokenProperty(addrKey, "tokenSupply");
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     cell1.innerHTML = tokenSymbol;
-    cell2.innerHTML = addrKey;
+    cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+tokenSymbol+"')\">"+tokenSymbol+"</a>"
+    cell2.innerHTML = tokenSupply;
     return true;
   }
   return false;
+}
+
+function populateContractProperties(tokenSymbol) {
+  var addressKey;
+  for (let [addrKey] of tm.addrMapObjs) {
+    var searchSymbol = tm.getTokenProperty(addrKey, "symbol");
+   
+    if (tokenSymbol == searchSymbol) {
+      addressKey = addrKey;
+      setContractProperties(addressKey)
+      break;
+    }
+  }
+  activateWalletBodyDiv('contract_DIV');
+}
+
+function setContractProperties(addressKey) {
+  var contractAddress = tm.getTokenProperty(addressKey, "address");
+  var name = tm.getTokenProperty(addressKey, "name");
+  var symbol = tm.getTokenProperty(addressKey, "symbol");
+  var contractWeiSupply = tm.getTokenProperty(addressKey, "totalSupply");
+  var decimals = tm.getTokenProperty(addressKey, "decimals");
+  var ContractTokenSupply = tm.getTokenProperty(addressKey, "tokenSupply");
+  var symbolName = "<b>" + symbol + " - " + name + " Contract Details</b>";
+  document.getElementById("Contract_Header").innerHTML = symbolName;
+  document.getElementById("contractAddress_TX").value = contractAddress;
+  document.getElementById("contractDecimals_TX").value = decimals;
+  document.getElementById("contractWeiSupply_TX").value = contractWeiSupply;
+  document.getElementById("contractTokenSupply_TX").value = ContractTokenSupply;
+
+  var contract = tm.getTokenProperty(addressKey, "contract");
+  getAccountBalanceOf(contract, contractAddress, "accountBalanceOf_TX");
+  activateWalletBodyDiv('contract_DIV');
 }
 
 function addNewTestToken(tableId) {
