@@ -75,8 +75,7 @@ function popUpWindowCenter(id) {
 
 
 function popupAddTokenForm(tokenSelect) {
-  // alert("Add Token Form To Go Here");
-  setWindowCentre("wallet_Popup_Div");
+  setWindowCentre("walletPopup_Div");
 }
 
 function setWindowCentre(id) {

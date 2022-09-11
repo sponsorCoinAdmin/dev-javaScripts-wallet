@@ -8,7 +8,6 @@
    <title>SponsorCoin.js</title>
    <link rel="stylesheet" href="./styles/main.css" />
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-   <script src="wallet/GUI_Wallet.js" type="application/javascript"></script>
 </head>
 
 <body onload="GUI_initPage()">
@@ -25,7 +24,8 @@
   </div>
   <div id="rebase_Div" class="menu_Class">
     <h1>Rebase Manager</h1>
-  </div>
+  </div>  <!--################################################################################################-->
+
   <div id="test_Div3" class="menu_Class">
     <h1>test_Div3</h1>
   </div>
@@ -43,7 +43,7 @@
     <h1>Test Data Div</h1>
   </div>
 
-  <div id="wallet_Popup_Div" class="menu_Class wallet_popup walletContainer"> </div>
+  <div id="walletPopup_Div" class="menu_Class wallet_popup walletContainer"> </div>
   <div id="popup_SC_Account_Div" class="menu_Class wallet_popup walletContainer"> </div>
   <!--################################################################################################-->
 
@@ -60,12 +60,12 @@
   <script>
     $("#menu_Div").load("./pages/menu/index.html");
     $("#whitePage_Div").load("./pages/whitePaper/index.html");
-    $("#wallet_Popup_Div").load("./pages/wallet/index.html");
+    $("#walletPopup_Div").load("./pages/wallet/index.html");
     $("#popup_SC_Account_Div").load("./pages/AccountManager/index.html");
     $("#testData_Div").load("./pages/testData/index.html");
     $("#scManager_Div").load("./pages/scManager/index.html");
   </script>
-
+  <script src="pages/wallet/GUI_Wallet.js" type="application/javascript"></script>
 
   <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
   <!---->
@@ -75,9 +75,10 @@
   <script src="contract/contractClass.js" type="application/javascript"></script>
   <script src="contract/contract.js" type="application/javascript"></script>
   <script src="utils/TokenMapperClass.js" type="application/javascript"></script>
+  <script src="utils/TableManager.js" type="application/javascript"></script>
   <script src="utils/TokenSelectorClass.js" type="application/javascript"></script>
-  <script src="wallet/walletClass.js" type="application/javascript"></script>
-  <script src="contract/WEB_Contract.js" type="application/javascript"></script>
+  <script src="pages/wallet/walletClass.js" type="application/javascript"></script>
+  <script src="contract/GUI_Contract.js" type="application/javascript"></script>
 </body>
 
 </html>

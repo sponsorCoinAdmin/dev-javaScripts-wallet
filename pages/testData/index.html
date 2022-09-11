@@ -1,38 +1,58 @@
 <link rel="stylesheet" href="./styles/table.css" />
-<table>
-    <tr>
-      <th>Token</th>
-      <th>Symbol</th>
-      <th>Address</th>
-    </tr>
-    <tr>
-      <td>Ethereum</td>
-      <td>ETH</td>
-      <td>0x1effde4a0e5eecf79810dd39f954a515ab962d63</td>
-    </tr>
-    <tr>
-      <td>Sponsor Coin</td>
-      <td>SPCOIN</td>
-      <td>0x0Cd5Ec0a1A8633B3e74bea6A2E7bC31d2F4c65ED</td>
-    </tr>
-    <tr>
-      <td>Chain Link</td>
-      <td>LINK</td>
-      <td>0xa36085F69e2889c224210F603D836748e7dC0088</td>
-    </tr>
-    <tr>
-      <td>US Dollar Token</td>
-      <td>USDT</td>
-      <td>0xf3e0d7bF58c5d455D31ef1c2d5375904dF525105</td>
-    </tr>
-    <tr>
-      <td>APY Finance</td>
-      <td>APY</td>
-      <td>0xbcef8576da8d073a7e46a640fda830067f8c107e</td>
-    </tr>
-    <tr>
-      <td>Swiss Bourg</td>
-      <td>CHSB</td>
-      <td>0x4c21b98ec8011a4762d28cd5ae2bd98fbc1e2614</td>
-    </tr>
-  </table>
+<table id="testTable">
+  <tr>
+    <th onclick="sortTable('testTable', 0)">Token</th>
+    <th onclick="sortTable('testTable', 1)">Symbol</th>
+    <th onclick="sortTable('testTable', 2)">Address</th>
+  </tr>
+  <tr>
+    <td>Ethereum</td>
+    <td>ETH</td>
+    <td>0x4f75f07232a56c2b98fc9878f496bfc32e317ace</td>
+  </tr>
+  <tr>
+    <td>Sponsor Coin</td>
+    <td>SPCOIN</td>
+    <td>0x0Cd5Ec0a1A8633B3e74bea6A2E7bC31d2F4c65ED</td>
+  </tr>
+  <tr>
+    <td>Chain Link</td>
+    <td>LINK</td>
+    <td>0xa36085F69e2889c224210F603D836748e7dC0088</td>
+  </tr>
+  <tr>
+    <td>US Dollar Token</td>
+    <td>USDT</td>
+    <td>0xf3e0d7bF58c5d455D31ef1c2d5375904dF525105</td>
+  </tr>
+  <tr>
+    <td>APY Finance</td>
+    <td>APY</td>
+    <td>0xbcef8576da8d073a7e46a640fda830067f8c107e</td>
+  </tr>
+  <tr>
+    <td>Swiss Bourg</td>
+    <td>CHSB</td>
+    <td>0x4c21b98ec8011a4762d28cd5ae2bd98fbc1e2614</td>
+  </tr>
+</table>
+
+<p>
+  <button type="button" onclick="addNewTestToken('testTable')">Add Token</button>
+  <input type="text" id="newTokenAddress_TX" />
+  <button type="button" onclick="loadContractsFromTable('testTable', 2)">Load Test Data</button>
+</p>
+
+<script>
+  function loadContractsFromTable(tableId, colIdx) {
+    var contracts = loadColumnValuesAsSet(tableId, colIdx);
+    loadContractsFromSet(contracts);
+  }
+
+  function loadContractsFromSet(contracts) {
+    for (const addr of contracts.values()) {
+      // alert(addr)
+      addContractAddress(addr);
+    }
+  }
+</script>

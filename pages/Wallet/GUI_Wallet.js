@@ -3,12 +3,12 @@ var tm;
 var ts;
 var activePage = "home";
 // Get arbitrary element with id "my-element"
-var elementToCheckIfClicksAreInsideOf = document.querySelector('#wallet_Popup_Div');
+var elementToCheckIfClicksAreInsideOf = document.querySelector('#walletPopup_Div');
 // Listen for click events on body
 document.addEventListener('click', function (event) {
-    if (elementToCheckIfClicksAreInsideOf.contains(event.target)) {
-        console.log('clicked inside');
-    } else {
+  if (elementToCheckIfClicksAreInsideOf.contains(event.target)) {
+    console.log('clicked inside');
+  } else {
       console.log('clicked outside');
     }
 });
@@ -19,11 +19,11 @@ document
 
 function GUI_initPage() {
   clearContractFields();
-  document.getElementById("wallet_Popup_Div").style.display = "none";
+  document.getElementById("walletPopup_Div").style.display = "none";
   window.addEventListener(
     "resize",
     function (event) {
-      setWindowCentre("wallet_Popup_Div");
+      setWindowCentre("walletPopup_Div");
     },
     true
   );
@@ -49,21 +49,23 @@ async function GUI_AddTokenContract(id) {
     var tokenSelectorStr = id.replace("_BTN", "_SEL");
     var tokenSelector = document.getElementById(id.replace("_BTN", "_SEL"));
     var addressKey = document.getElementById(id.replace("_BTN", "_ADR")).value;
-    contractMap = await wallet.getContractMapByAddressKey(addressKey);
-    ts.mapWalletToSelector(wallet);
-    // ts.AddTokenContract(addressKey);
-
-    // var opt = tokenSelector.options;
-    // var optionLength = opt.length;
-    // var tokenSymbol = contractMap.get("symbol");
-    // tokenSelector.options[tokenSelector.options.length] = new Option(tokenSymbol, addressKey)
-    // // alert("Validating Token Contract " + addressKey);
-
+    contractMap = await addContractAddress(addressKey);
     changeElementIdColor(id, "green");
   } catch (err) {
     document.getElementById(id.replace("_BTN", "_TX")).value = "";
     alertLogError(err, id);
   }
+}
+
+async function addContractAddress(addrKey) {
+  try {
+    contractMap = await wallet.getContractMapByAddressKey(addrKey);
+    ts.mapWalletToSelector(wallet);
+    addTableRow("assetsTable", addrKey);
+  } catch (err) {
+    alertLogError(err, addrKey);
+  }
+  return contractMap;
 }
 
 // 2. Connect Active Account
@@ -101,17 +103,16 @@ async function GUI_getEthereumAccountBalance(id) {
 */
 
 function GUI_OpenPopupWallet() {
-  document.getElementById("wallet_Popup_Div").style.display = "block";
-  setWindowCentre("wallet_Popup_Div");
+  document.getElementById("walletPopup_Div").style.display = "block";
+  setWindowCentre("walletPopup_Div");
 }
 
 function GUI_ClosePopupWallet(selectId) {
-  document.getElementById("wallet_Popup_Div").style.display = "none";
+  document.getElementById("walletPopup_Div").style.display = "none";
   ts.rebaseSelected();
 }
 
 function selectedTokenChanged() {
-  alert("HERE");
   var selector = document.getElementById("tokenContract_SEL");
   var size = selector.options.length;
   var idx = selector.selectedIndex;
@@ -144,7 +145,6 @@ function selectedTokenChanged() {
 }
 
 async function getAccountBalanceOf(contract, contractAddress, id_TX) {
-  alert("getAccountBalanceOf");
   var element = document.getElementById(id_TX);
   var promiseBalanceOf = await contract.balanceOF(contractAddress);
   id_TX.value = promiseBalanceOf.value();

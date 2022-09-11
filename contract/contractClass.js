@@ -10,8 +10,6 @@ async function init(contract) {
 
 class ContractWrap {
   constructor(_address, _abi, _signer) {
-    var junk = "JUNK"
-
     this.loaded = false;
     this.address = _address;
     this.ABI = _abi;

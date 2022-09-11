@@ -1,24 +1,28 @@
 body {font-family: Arial, Helvetica, sans-serif;}
 * {box-sizing: border-box;}
 
-#walletPopup_Div {
+#walletPopup_Div_BROKE {
   height:500px;
-  width:410px;
-  background-color: yellow;
+  width:710px;
+  background-color: pink;
 }
 
 #walletHeader_Div {
   height: 70px;
+  width:   100%;
   background-color: orange;
 }
 
 #walletBody_Div {
   background-color: green;
-  height: 430px;
+  width:   100%;
+  height: 360px;
 }
 
 .walletBodyContainer {
    display: none;
+   background-color: white;
+
  }
  
 /* The popup form - hidden by default */
@@ -41,7 +45,7 @@ body {font-family: Arial, Helvetica, sans-serif;}
 .walletContainer input[type=text], .walletContainer input[type=password] {
   width:   100%;
   padding: 10px;
-  margin: 5px 0 22px 0;
+  margin: 5px 0 1px 0;
   border: none;
   background: #f1f1f1;
 }
@@ -52,26 +56,9 @@ body {font-family: Arial, Helvetica, sans-serif;}
   outline: none;
 }
 
-/* Set a style for the submit/login button */
-.btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 1px 1px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
 /* Add a red background color to the cancel button */
 .walletContainer .cancel {
   background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.walletContainer .btn:hover, .open-button:hover {
-  opacity: 1;
 }
 
 div.scroll {
@@ -98,4 +85,55 @@ H2 {
   height: 27px;
   color: black;
   font-family: Helvetica;
+}
+
+
+/* Set a style for the submit/login button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 1px 1px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+/* Add some hover effects to buttons */
+.walletContainer .btn:hover, .open-button:hover {
+  opacity: 1;
+}
+
+.buttons {
+  background-color: #04AA6D;
+  text-align:justify;
+}
+
+.buttons:after {
+  content:'';
+  width:100%;
+}
+
+/* makeup*/
+.buttons {
+  padding: 10px;
+}
+
+.cell_BTN {
+  background-color: #5482c7;
+  text-align: center;
+  display: inline-block;
+  border: none;
+  width:100%; 
+  height:100%;
+  font-size: 16px;
+  margin: 4px 0px;
+
+  /* 
+  color: white;
+  padding: 3px 8px;
+  text-decoration: none;
+  cursor: pointer;
+  */
 }

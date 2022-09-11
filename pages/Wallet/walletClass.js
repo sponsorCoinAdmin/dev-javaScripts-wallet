@@ -36,7 +36,6 @@ class Wallet {
   }
 
   async getContractMapByAddressKey(_addressKey) {
-    var addressObject;
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
     // check if contract exists
@@ -51,7 +50,7 @@ class Wallet {
     var contractMap = null;
     try {
       var abi = _abi == undefined ? spCoinABI : _abi;
-      var contract = new Contract(_contractAddress, abi, this.signer);
+      var contract = new ContractWrap(_contractAddress, abi, this.signer);
       await contract.init().then(ret => {contractMap = this.tm.mapWalletObjectByAddressKey(contract)});
       //contractMap = this.tm.mapWalletObjectByAddressKey(contract);
     } catch (err) {
