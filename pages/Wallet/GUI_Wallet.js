@@ -113,6 +113,7 @@ function GUI_ClosePopupWallet(selectId) {
 }
 
 function selectedTokenChanged() {
+  alert("HERE");
   var selector = document.getElementById("tokenContract_SEL");
   var size = selector.options.length;
   var idx = selector.selectedIndex;
