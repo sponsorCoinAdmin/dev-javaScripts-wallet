@@ -47,6 +47,8 @@ class ContractWrap {
      this.decimals = values[3];
      this.balance = await contract.balanceOf(this.address);
 alert("balanceOf() = " + this.balance);
+var account = await contract.getAccount(this.address);
+alert("getBalance() = " + this.balance);
     this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
 
     } catch (err) {
