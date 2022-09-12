@@ -35,9 +35,7 @@ async function GUI_connectWallet(id, _walletName) {
     wallet = new Wallet(_walletName);
     await wallet.init();
     changeElementIdColor(id, "green");
-    ts = wallet.ts;
-    tm = ts.tm;
-    selectedTokenChanged();
+    tm = wallet.tm;
   } catch (err) {
     alertLogError(err, id);
     document.getElementById("ethereumAccountBalance_TX").value = "";
@@ -60,7 +58,6 @@ async function GUI_AddTokenContract(id) {
 async function addContractAddress(addrKey) {
   try {
     contractMap = await wallet.getContractMapByAddressKey(addrKey);
-    ts.mapWalletToSelector(wallet);
     addTableRow("assetsTable", addrKey);
   } catch (err) {
     alertLogError(err, addrKey);
@@ -109,39 +106,6 @@ function GUI_OpenPopupWallet() {
 
 function GUI_ClosePopupWallet(selectId) {
   document.getElementById("walletPopup_Div").style.display = "none";
-  ts.rebaseSelected();
-}
-
-function selectedTokenChanged() {
-  var selector = document.getElementById("tokenContract_SEL");
-  var size = selector.options.length;
-  var idx = selector.selectedIndex;
-  if (idx == 0) {
-    activateWalletBodyDiv('inportTokens_DIV');
-    //showElementById('inportTokens_DIV');
-  } else if (idx < size && idx > 0) {
-    showElementById('selector_Div');
-
-    var selOption = selector.options[idx];
-    var tokenText = selOption.text;
-    var selectorPropertyKey = selOption.value;
-    var contractAddress = tm.getTokenProperty(selectorPropertyKey, "address");
-    var name = tm.getTokenProperty(selectorPropertyKey, "name");
-    var symbol = tm.getTokenProperty(selectorPropertyKey, "symbol");
-    var contractWeiSupply = tm.getTokenProperty(selectorPropertyKey, "totalSupply");
-    var decimals = tm.getTokenProperty(selectorPropertyKey, "decimals");
-    var ContractTokenSupply = tm.getTokenProperty(selectorPropertyKey, "tokenSupply");
-    var symbolName = "<b>" + symbol + " - " + name + " Contract Details</b>";
-    document.getElementById("Contract_Header").innerHTML = symbolName;
-    document.getElementById("contractAddress_TX").value = contractAddress;
-    document.getElementById("contractDecimals_TX").value = decimals;
-    document.getElementById("contractWeiSupply_TX").value = contractWeiSupply;
-    document.getElementById("contractTokenSupply_TX").value = ContractTokenSupply;
-
-    var contract = tm.getTokenProperty(selectorPropertyKey, "contract");
-    getAccountBalanceOf(contract, contractAddress, "accountBalanceOf_TX");
-    activateWalletBodyDiv('contract_DIV');
-  } else alert("token Selector Index " + idx + " Out of Range");
 }
 
 async function getAccountBalanceOf(contract, contractAddress, id_TX) {

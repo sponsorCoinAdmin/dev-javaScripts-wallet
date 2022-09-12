@@ -9,8 +9,7 @@ class Wallet {
       this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
-      this.ts = new TokenSelectorClass("tokenContract_SEL");
-      this.tm = this.ts.tm;
+      this.tm = new TokenMap();;
       this.walletName = _walletName;
     } catch (err) {
       processError(err);
@@ -27,7 +26,6 @@ class Wallet {
       this.totalSupply = await this.signer.getBalance();
       this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
       var tokenMapValues = this.tm.mapWalletObjectByAddressKey(this);
-      this.ts.init();
     } catch (err) {
       processError(err);
       throw err;

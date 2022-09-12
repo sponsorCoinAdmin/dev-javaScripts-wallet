@@ -19,6 +19,7 @@ class ContractWrap {
     this.symbol;
     this.totalSupply;
     this.decimals;
+    this.balance;
     // this.init();
     // this.alertVals();
     // setTimeout(this.alertVals, 3000);
@@ -35,13 +36,17 @@ class ContractWrap {
   async init() {
     try {
      var contract = this.contract;
-     var values = await Promise.all([contract.name(), contract.symbol(), contract.totalSupply(), contract.decimals()]);
+     var values = await Promise.all([contract.name(),
+                                     contract.symbol(),
+                                     contract.totalSupply(),
+                                     contract.decimals()]);
      console.log(values);
      this.name = values[0];
      this.symbol = values[1];
      this.totalSupply = values[2];
      this.decimals = values[3];
-
+     this.balance = await contract.balanceOf(this.address);
+alert("balanceOf() = " + this.balance);
     this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
 
     } catch (err) {
