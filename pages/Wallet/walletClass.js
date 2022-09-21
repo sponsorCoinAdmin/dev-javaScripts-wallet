@@ -1,10 +1,22 @@
+/*
+let provider = new ethers.providers.Web3Provider(window.ethereum)
+let signer
+
+// 1. Connect Metamask with Dapp
+async function connectMetamask() {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    // MetaMask requires requesting permission to connect users accounts
+    await provider.send("eth_requestAccounts", []);
+
+    signer = await provider.getSigner();
+
+    console.log("Account address s:", await signer.getAddress());
+}
+*/
+
 class Wallet {
   constructor(_walletName) {
     try {
-      this.accountList;
-      this.network;
-      this.address;
-      this.balance;
       this.decimals = 18;
       this.defaultWalletName = "METAMASK";
       this.eth_requestAccounts;
@@ -20,33 +32,11 @@ class Wallet {
   async init() {
     try {
       this.provider = this.connectValidWalletProvider(this.walletName);
-      this.eth_requestAccounts = await this.provider.send("eth_requestAccounts", []);
-      this.address = this.eth_requestAccounts.toString();
-      this.signer = await provider.signer;
-      const { chainId } = await provider.getNetwork()
-      this.network = await provider.getNetwork();
-      this.network_name  = await provider.getNetwork();
-      this.balance = await this.getEthereumAccountBalance();
-      this.totalSupply = await this.signer.getBalance();
-      this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
-      var tokenMapValues = this.tm.mapWalletObjectByAddressKey(this);
-    } catch (err) {
-      processError(err);
-      throw err;
-    }
-    return tokenMapValues;
-  }
-
-  async init_NEW() {
-    try {
-      this.provider = this.connectValidWalletProvider(this.walletName);
       await this.provider.send("eth_requestAccounts", []).then(requestAccounts => {this.eth_requestAccounts = requestAccounts})
       .catch(error => {throw error});
       this.address = this.eth_requestAccounts.toString();
-      await provider.getSigner().then(signer => {this.signer = signer})
-      .catch(error => {throw error});
-      await provider.getNetwork().then(network => {this.network = network})
-      .catch(error => {throw error});
+      this.signer = await provider.getSigner();
+      this.network = await provider.getNetwork();
       this.network_name  = this.network.name;
       this.balance = await this.getEthereumAccountBalance();
       this.totalSupply = await this.signer.getBalance();
@@ -58,8 +48,7 @@ class Wallet {
     }
     return tokenMapValues;
   }
-
-
+ 
   async getContractMapByAddressKey(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
