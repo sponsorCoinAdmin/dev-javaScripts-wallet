@@ -1,4 +1,4 @@
-spCoinABI = [
+const SPCOIN_ABI = [
   {
     anonymous: false,
     inputs: [

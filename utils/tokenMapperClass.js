@@ -33,6 +33,11 @@ class TokenMap {
     return objMap;
   }
 
+  mapContractToWallet(contract) {
+    var addressKey = contract.address;
+    this.setTokenProperty(addressKey, "contract",    contract);
+  }
+  
   mapWalletObjectByAddressKey(walletObj) {
     var contract = walletObj.contract;
     var addressKey = walletObj.address;

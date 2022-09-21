@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Learn Ethers.js</title>
+
+</head>
+
+<body>
+  <button onclick="connectMetamask()">connect</button><BR>
+
+  <button onclick="getBalance()">getBalance</button><BR>
+  <button
+    onclick="readDataFromSmartContract(document.getElementById('contractAddress_TX').value)">readDataFromSmartContract</button>
+  <input type="text" id="contractAddress_TX" style="width:350px"
+    value="0x3f0A0EA2f86baE6362CF9799B523BA06647Da018" /><BR>
+
+  <H1>Main Net Table</H1>
+  <table id="mainNetTable">
+    <tr>
+      <th onclick="sortTable('mainNetTable', 0)">Token</th>
+      <th onclick="sortTable('mainNetTable', 1)">Symbol</th>
+      <th onclick="sortTable('mainNetTable', 2)">Address</th>
+    </tr>
+    <tr>
+      <td>Ethereum</td>
+      <td>ETH</td>
+      <td>0xFAbed8e2f3a29aEE5002087F1140Ef4C6ACa25B4</td>
+    </tr>
+    <tr>
+      <td>Shiba</td>
+      <td>SHIB</td>
+      <td>0x95aD61b0a150d79219dCF64E1E6Cc01f0B64C4cE</td>
+    </tr>
+    <tr>
+      <td>Chain Link</td>
+      <td>LINK</td>
+      <td>0x514910771af9ca656af840dff83e8264ecf986ca</td>
+    </tr>
+  </table>
+
+  <H1>Goerli Table</H1>
+  <table id="goerliTable">
+    <tr>
+      <th onclick="sortTable('goerliTable', 0)">Token</th>
+      <th onclick="sortTable('goerliTable', 1)">Symbol</th>
+      <th onclick="sortTable('goerliTable', 2)">Address</th>
+    </tr>
+    <tr>
+      <td>Ethereum</td>
+      <td>ETH</td>
+      <td>0x4f75f07232a56c2b98fc9878f496bfc32e317ace</td>
+    </tr>
+    <tr>
+      <td>Sponsor Coin</td>
+      <td>SPCOIN</td>
+      <td>0xD5D2fd6c5E71618310baE2867513e3c9c90FD837</td>
+    </tr>
+    <tr>
+      <td>Chain Link</td>
+      <td>LINK</td>
+      <td>0x326C977E6efc84E512bB9C30f76E30c160eD06FB</td>
+    </tr>
+    <tr>
+      <td>US Dollar Coin</td>
+      <td>USDC</td>
+      <td>0xD87Ba7A50B2E7E660f678A895E4B72E7CB4CCd9C</td>
+    </tr>
+    <tr>
+      <td>Uniswap</td>
+      <td>UNI</td>
+      <td>0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984</td>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td>TEST</td>
+      <td>0xC1a1c4568be43E43d3b7D98354Ec76F458075356</td>
+    </tr>
+
+  </table>
+
+  <H1>Kovan Table</H1>
+  <table id="kovanTable">
+    <tr>
+      <th onclick="sortTable('kovanTable', 0)">Token</th>
+      <th onclick="sortTable('kovanTable', 1)">Symbol</th>
+      <th onclick="sortTable('kovanTable', 2)">Address</th>
+    </tr>
+    <tr>
+      <td>Ethereum</td>
+      <td>ETH</td>
+      <td>0x4f75f07232a56c2b98fc9878f496bfc32e317ace</td>
+    </tr>
+    <tr>
+      <td>Sponsor Coin</td>
+      <td>SPCOIN</td>
+      <td>0x0Cd5Ec0a1A8633B3e74bea6A2E7bC31d2F4c65ED</td>
+    </tr>
+    <tr>
+      <td>Chain Link</td>
+      <td>LINK</td>
+      <td>0xa36085F69e2889c224210F603D836748e7dC0088</td>
+    </tr>
+    <tr>
+      <td>Test</td>
+      <td>TEST</td>
+      <td>0xC56f415D2d21193Aa301400302F8DdACb92A6Ad0</td>
+    </tr>
+  </table>
+
+  <script src="../ABIs/spCoin_ABI.js" type="application/javascript"></script>
+  <script src="../ABIs/DEFAULT_ABI.js" type="application/javascript"></script>
+  <script src="../contract/contractClass.js" type="application/javascript"></script>
+
+  <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+  <script src="index.js"></script>
+
+</body>
+
+</html>

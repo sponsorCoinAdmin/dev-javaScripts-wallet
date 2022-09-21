@@ -9,7 +9,7 @@ document.addEventListener('click', function (event) {
   if (elementToCheckIfClicksAreInsideOf.contains(event.target)) {
     console.log('clicked inside');
   } else {
-      console.log('clicked outside');
+    console.log('clicked outside');
     }
 });
 
@@ -34,7 +34,15 @@ async function GUI_connectWallet(id, _walletName) {
   try {
     wallet = new Wallet(_walletName);
     await wallet.init();
-    changeElementIdColor(id, "green");
+    var connectMenuButton = document.getElementById(id);
+    document.getElementById("menuConnect_BTN").style.display = "none";;
+    document.getElementById("menuConnected_BTN").style.display = "block";
+    changeElementIdColor("menuConnected_BTN", "green");
+    var headerText=document.getElementById("header_SPAN");
+    headerText.textContent ="Network: " + wallet.network_name;
+    var headerText2=document.getElementById("header2_SPAN");
+    headerText2.textContent ="Account:"+wallet.address;
+
     tm = wallet.tm;
   } catch (err) {
     alertLogError(err, id);

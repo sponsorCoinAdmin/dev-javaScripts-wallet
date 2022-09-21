@@ -52,4 +52,18 @@ ul {
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+  #menuConnect_BTN
+  {
+      float:right;
+      background-color: red;
+      display: block;
+  }
+  
+  #menuConnected_BTN
+  {
+      float:right;
+      background-color: rgb(21, 104, 44);
+      display: none;
+  }
   
