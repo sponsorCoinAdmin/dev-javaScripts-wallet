@@ -1,16 +1,28 @@
+/*
+let provider = new ethers.providers.Web3Provider(window.ethereum)
+let signer
+
+// 1. Connect Metamask with Dapp
+async function connectMetamask() {
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    // MetaMask requires requesting permission to connect users accounts
+    await provider.send("eth_requestAccounts", []);
+
+    signer = await provider.getSigner();
+
+    console.log("Account address s:", await signer.getAddress());
+}
+*/
+
 class Wallet {
   constructor(_walletName) {
     try {
-      this.accountList;
-      this.address;
-      this.balance;
       this.decimals = 18;
       this.defaultWalletName = "METAMASK";
       this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
-      this.ts = new TokenSelectorClass("tokenContract_SEL");
-      this.tm = this.ts.tm;
+      this.tm = new TokenMap();
       this.walletName = _walletName;
     } catch (err) {
       processError(err);
@@ -20,44 +32,78 @@ class Wallet {
   async init() {
     try {
       this.provider = this.connectValidWalletProvider(this.walletName);
-      this.eth_requestAccounts = await this.provider.send("eth_requestAccounts", []);
+      await this.provider.send("eth_requestAccounts", []).then(requestAccounts => {this.eth_requestAccounts = requestAccounts})
+      .catch(error => {throw error});
       this.address = this.eth_requestAccounts.toString();
       this.signer = await provider.getSigner();
+      this.network = await provider.getNetwork();
+      this.network_name  = this.network.name;
       this.balance = await this.getEthereumAccountBalance();
       this.totalSupply = await this.signer.getBalance();
       this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
       var tokenMapValues = this.tm.mapWalletObjectByAddressKey(this);
-      this.ts.init();
     } catch (err) {
       processError(err);
       throw err;
     }
     return tokenMapValues;
   }
-
+ 
   async getContractMapByAddressKey(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
     // check if contract exists
     if (contractMap == undefined) {
       // Contract not found. Create new contract
-      contractMap = await this.addNewTokenContractToMap(_addressKey, spCoinABI);
+      contractMap = await this.addNewTokenContractToMap(_addressKey, SPCOIN_ABI);
     }
     return contractMap;
   }
 
-  async addNewTokenContractToMap(_contractAddress, _abi) {
+  async addNewTokenContractToMap(_contractAddress, _ABI) {
     var contractMap = null;
     try {
-      var abi = _abi == undefined ? spCoinABI : _abi;
-      var contract = new ContractWrap(_contractAddress, abi, this.signer);
-      await contract.init().then(ret => {contractMap = this.tm.mapWalletObjectByAddressKey(contract)});
+      var abi = _ABI == undefined ? SPCOIN_ABI : _ABI;
+      var contract = new ethers.Contract(_contractAddress, abi, this.signer);
+      await this.setContractValues (contract);
+
       //contractMap = this.tm.mapWalletObjectByAddressKey(contract);
     } catch (err) {
       processError(err);
       throw err;
     }
     return contractMap;
+  }
+
+  async setContractValues (contract) {
+    var contractAddressKey = contract.address;
+    var values = await Promise.all([
+      contract.name(),
+      contract.symbol(),
+      contract.totalSupply(),
+      contract.decimals(),
+    ]);
+    console.log(values);
+    var name = values[0];
+    var symbol = values[1];
+    var totalSupply = values[2];
+    var decimals = values[3];
+    var tokenSupply = weiToToken(totalSupply, decimals);
+    var balanceOf = await contract.balanceOf(this.address);
+
+    var outputStr = "name = " + name + "\n";
+    outputStr += " symbol " + symbol + "\n";
+    outputStr += " totalSupply " + totalSupply + "\n";
+    outputStr += " decimals " + decimals + "\n";
+    outputStr += " balanceOf " + balanceOf + "\n";
+    alert("Loaded Token\n" + outputStr);
+    this.tm.setTokenProperty(contractAddressKey, "contract",    contract);
+    this.tm.setTokenProperty(contractAddressKey, "name",        name);
+    this.tm.setTokenProperty(contractAddressKey, "symbol",      symbol);
+    this.tm.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
+    this.tm.setTokenProperty(contractAddressKey, "decimals",    decimals);
+    this.tm.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
+    this.tm.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
   }
 
   connectValidWalletProvider(_walletName) {

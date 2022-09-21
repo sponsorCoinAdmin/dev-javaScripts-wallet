@@ -20,13 +20,13 @@ function addTableRow(tableId, addrKey) {
     addressMap.set(addrKey, contract);
     var table = document.getElementById(tableId);
     var tokenSymbol = tm.getTokenProperty(addrKey, "symbol");
-    var tokenSupply = tm.getTokenProperty(addrKey, "tokenSupply");
+    var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     cell1.innerHTML = tokenSymbol;
     cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+tokenSymbol+"')\">"+tokenSymbol+"</a>"
-    cell2.innerHTML = tokenSupply;
+    cell2.innerHTML = balanceOf;
     return true;
   }
   return false;

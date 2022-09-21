@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="./styles/menu.css" />
-<ul>
+<ul id="menu">
     <li class="dropdown">
         <a class="dropbtn" href="javascript:void(0)"
             onclick="popUpWindowCenter('walletPopup_Div')">WALLET</a>
@@ -27,6 +27,8 @@
     <li><a href="#news" onclick="activateMenuDiv('testData_Div')">TEST DATA</a></li>
     <li><a href="#news" onclick="activateMenuDiv('whitePage_Div')">WHITE PAPER</a></li>
     <li><a href="#news" onclick="activateMenuDiv('about_Div')">ABOUT</a></li>
+    <li id="menuConnect_BTN"><a href="#news" onclick="GUI_connectWallet('menuConnect_BTN', 'METAMASK')">CONNECT</a></li>
+    <li id="menuConnected_BTN"><a href="#news" onclick="GUI_connectWallet('menuConnected_BTN', 'METAMASK')">CONNECTED</a></li>
 </ul>
 
 <Script>

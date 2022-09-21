@@ -1,18 +1,17 @@
 <link rel="stylesheet" href="./styles/walletPopup.css" />
-<!-- <script src="pages/wallet/GUI_Wallet.js" type="application/javascript"></script> -->
 
 <div id="walletPopup_Div">
   <div id="walletHeader_Div">
     <div id="addContract_Div">
-      <button id="connectWallet_BTN" class="cell_BTN walletHeaderContainer"
-        onclick="GUI_connectWallet(this.id, 'METAMASK')">
-        Connect Wallet
-      </button>
+      <span id="header_SPAN" class="currency-display-component__text">Not Connected</span>
+      <span id="header2_SPAN" class="currency-display-component__text"></span>
     </div>
-    <div id="selector_Div" class="walletHeaderContainer">
-      <select id="tokenContract_SEL" class="cell_BTN" onchange="selectedTokenChanged()">
-        <option value="" selected="selected">Inport Token</option>
-      </select>
+    <div class="buttons">
+      <button id="accountData" onclick="activateWalletBodyDiv('accounts_DIV')">Assets</button>
+      <!-- <button id="contractData" onclick="activateWalletBodyDiv('contract_DIV')">Contract Data</button> -->
+      <button id="inportToken" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
+      <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
+      <button type="button" onclick="loadContractsFromTable('testTable', 2)">Load Test Data</button>
     </div>
   </div>
   <div id="walletBody_Div" class="scroll">
@@ -57,18 +56,11 @@
       <table id="assetsTable">
         <tr>
           <th onclick="sortTable('assetsTable', 1)">Symbol</th>
-          <th onclick="sortTable('assetsTable', 2)">Address</th>
+          <th onclick="sortTable('assetsTable', 2)">Tokens</th>
         </tr>
       </table>
     </div>
   </div>
 
-  <div class="buttons">
-    <button id="accountData" onclick="activateWalletBodyDiv('accounts_DIV')">Assets</button>
-    <!-- <button id="contractData" onclick="activateWalletBodyDiv('contract_DIV')">Contract Data</button> -->
-    <button id="inportToken" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
-    <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
-    <button type="button" onclick="loadContractsFromTable('testTable', 2)">Load Test Data</button>
-  </div>
   <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet('tokenContract_SEL')">Close Wallet</button>
 </div>
