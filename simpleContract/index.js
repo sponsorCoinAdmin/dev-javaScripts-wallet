@@ -29,7 +29,6 @@ const usdtAddress = "0x0Cd5Ec0a1A8633B3e74bea6A2E7bC31d2F4c65ED";
 
 async function readDataFromSmartContract(addr) {
     let abi = getABIFromAddress(addr);
-    var contractOLD = new ContractWrap(_contractAddress, abi, this.signer);
     const contract = new ethers.Contract(addr, abi, signer);
   
     const name = await contract.name();

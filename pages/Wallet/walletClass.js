@@ -1,24 +1,7 @@
-/*
-let provider = new ethers.providers.Web3Provider(window.ethereum)
-let signer
-
-// 1. Connect Metamask with Dapp
-async function connectMetamask() {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    // MetaMask requires requesting permission to connect users accounts
-    await provider.send("eth_requestAccounts", []);
-
-    signer = await provider.getSigner();
-
-    console.log("Account address s:", await signer.getAddress());
-}
-*/
-
 class Wallet {
   constructor(_walletName) {
     try {
       this.decimals = 18;
-      this.defaultWalletName = "METAMASK";
       this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
@@ -38,17 +21,67 @@ class Wallet {
       this.signer = await provider.getSigner();
       this.network = await provider.getNetwork();
       this.network_name  = this.network.name;
-      this.balance = await this.getEthereumAccountBalance();
-      this.totalSupply = await this.signer.getBalance();
-      this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
-      var tokenMapValues = this.tm.mapWalletObjectByAddressKey(this);
-    } catch (err) {
+      this.balance = await this.signer.getBalance();
+      this.ethBalance = await this.getEthereumAccountBalance();
+      var walletMapValues = this.setWalletMapValues ();
+      this.dumpWalletMapValues(walletMapValues);
+     } catch (err) {
       processError(err);
       throw err;
     }
-    return tokenMapValues;
   }
- 
+
+  setWalletMapValues () {
+    // ToDo Write this.
+    var walletMapValues = new Map([]);
+    walletMapValues.set("Wallet", this.walletName);
+    walletMapValues.set("Account Address", this.address);
+    walletMapValues.set("Network_Name", this.network_name);
+    walletMapValues.set("name", this.name);
+    walletMapValues.set("symbol", this.symbol);
+    walletMapValues.set("balance", this.balance);
+    walletMapValues.set("decimals", this.decimals);
+    walletMapValues.set("Etherium Balance", this.ethBalance);
+    walletMapValues.set("Token Map Values", this.tm);
+    return walletMapValues;
+  }
+
+  dumpWalletMapValues (walletMapValues) {
+    let text = "";
+    for (const x of walletMapValues.entries()) {
+      const keyValueArray = x.toString().split(",");
+      if (keyValueArray[0] == "Token Map Values") {
+        text += this.getTokenMapValues(x.get(keyValueArray[0]))
+      }
+      else {
+        text += x + "\n";
+      }
+    }
+    alert (text);
+  }
+
+  getTokenMapValues(tokenMapValues) {
+    let text = "";
+    for (const x of tokenMapValues.entries()) {
+      text += x + "\n";
+    }
+    return text;
+  }
+
+  async getEthereumAccountBalance() {
+    const decimals = 1e18;
+    var ethbalance;
+    try {
+      const balance = await this.signer.getBalance();
+      ethbalance = weiToToken(balance, this.decimals);
+      console.log("account's balance in ether:", ethbalance);
+    } catch (err) {
+      processError(err);
+    }
+    return ethbalance;
+  }
+
+   
   async getContractMapByAddressKey(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
@@ -155,18 +188,6 @@ class Wallet {
     this.tm.setTokenProperty(_address, _propertyKey, _propertyValue);
   }
 
-  async getEthereumAccountBalance() {
-    const decimals = 1e18;
-    var ethbalance;
-    try {
-      const balance = await this.signer.getBalance();
-      ethbalance = balance.toString() / decimals;
-      console.log("account's balance in ether:", ethbalance);
-    } catch (err) {
-      processError(err);
-    }
-    return ethbalance;
-  }
 }
 
 function connectMetaMask() {
