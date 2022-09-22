@@ -35,7 +35,7 @@ async function GUI_connectWallet(id, _walletName) {
     wallet = new Wallet(_walletName);
     await wallet.init();
     var connectMenuButton = document.getElementById(id);
-    document.getElementById("menuConnect_BTN").style.display = "none";;
+    document.getElementById("menuConnect_BTN").style.display = "none";
     document.getElementById("menuConnected_BTN").style.display = "block";
     changeElementIdColor("menuConnected_BTN", "green");
     var headerText=document.getElementById("header_SPAN");
@@ -112,7 +112,7 @@ function GUI_OpenPopupWallet() {
   setWindowCentre("walletPopup_Div");
 }
 
-function GUI_ClosePopupWallet(selectId) {
+function GUI_ClosePopupWallet() {
   document.getElementById("walletPopup_Div").style.display = "none";
 }
 

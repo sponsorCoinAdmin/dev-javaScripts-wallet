@@ -39,13 +39,12 @@ class Wallet {
   toString () {
     var walletMapValues = this.setWalletMapValues ();
     let text = "";
-    for (const x of walletMapValues.entries()) {
-      const keyValueArray = x.toString().split(",");
-      if (keyValueArray[0] == "Token Map Values") {
-        text += x;
+    for (const entry of walletMapValues.entries()) {
+      if (entry[0] == "Tokens") {
+        text += entry[0] + ":\n" +  entry[1].toString();
       }
       else {
-        text += x + "\n";
+        text += entry + "\n";
       }
     }
     return text;
@@ -62,7 +61,7 @@ class Wallet {
     walletMapValues.set("balance", this.balance);
     walletMapValues.set("decimals", this.decimals);
     walletMapValues.set("Etherium Balance", this.ethBalance);
-    walletMapValues.set("Token Map Values", this.tm);
+    walletMapValues.set("Tokens", this.tm);
     return walletMapValues;
   }
 
