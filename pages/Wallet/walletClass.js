@@ -23,12 +23,32 @@ class Wallet {
       this.network_name  = this.network.name;
       this.balance = await this.signer.getBalance();
       this.ethBalance = await this.getEthereumAccountBalance();
-      var walletMapValues = this.setWalletMapValues ();
-      this.dumpWalletMapValues(walletMapValues);
+      this.dump();
      } catch (err) {
       processError(err);
       throw err;
     }
+  }
+
+  dump() {
+    var walletToString = this.toString();
+    alert(walletToString);
+    console.log(walletToString);
+  }
+  
+  toString () {
+    var walletMapValues = this.setWalletMapValues ();
+    let text = "";
+    for (const x of walletMapValues.entries()) {
+      const keyValueArray = x.toString().split(",");
+      if (keyValueArray[0] == "Token Map Values") {
+        text += x;
+      }
+      else {
+        text += x + "\n";
+      }
+    }
+    return text;
   }
 
   setWalletMapValues () {
@@ -44,20 +64,6 @@ class Wallet {
     walletMapValues.set("Etherium Balance", this.ethBalance);
     walletMapValues.set("Token Map Values", this.tm);
     return walletMapValues;
-  }
-
-  dumpWalletMapValues (walletMapValues) {
-    let text = "";
-    for (const x of walletMapValues.entries()) {
-      const keyValueArray = x.toString().split(",");
-      if (keyValueArray[0] == "Token Map Values") {
-        text += this.getTokenMapValues(x.get(keyValueArray[0]))
-      }
-      else {
-        text += x + "\n";
-      }
-    }
-    alert (text);
   }
 
   getTokenMapValues(tokenMapValues) {
