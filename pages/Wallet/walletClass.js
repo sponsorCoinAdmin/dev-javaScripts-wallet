@@ -1,29 +1,45 @@
-/*
-let provider = new ethers.providers.Web3Provider(window.ethereum)
-let signer
+// let connection = new Connection();
 
-// 1. Connect Metamask with Dapp
-async function connectMetamask() {
-    provider = new ethers.providers.Web3Provider(window.ethereum);
-    // MetaMask requires requesting permission to connect users accounts
-    await provider.send("eth_requestAccounts", []);
+class Connection {
+  constructor (_walletName) {
+    this.defaultWalletName = _walletName == undefined ? "METAMASK" : _walletName;
+  }
 
-    signer = await provider.getSigner();
+  connected() {
+    return this.wallet == undefined ? false : true;
+  }
 
-    console.log("Account address s:", await signer.getAddress());
+  getWallet () {
+    return this.wallet;
+  }
+
+  getAvailableConnection (_walletName) {
+    this.validateWalletName (_walletName);
+    if (!this.connected() || !(this.wallet.walletName != _walletName))
+      this.connect (_walletName);
+    return this.wallet;
+  }
+
+  connect (_walletName) {
+    this.validateWalletName (_walletName);
+    this.wallet = new Wallet(_walletName);
+    return this.wallet;
+  }
+
+  validateWalletName (_walletName) {
+    this.walletName = _walletName == undefined ? this.defaultWalletName: _walletName;
+  }
 }
-*/
 
 class Wallet {
   constructor(_walletName) {
     try {
+      this.walletName = _walletName;
       this.decimals = 18;
-      this.defaultWalletName = "METAMASK";
       this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
       this.tm = new TokenMap();
-      this.walletName = _walletName;
     } catch (err) {
       processError(err);
     }

@@ -29,7 +29,9 @@ function GUI_initPage() {
 // 1. Connect Metamask with Dapp
 async function GUI_connectWallet(id, _walletName) {
   try {
-    wallet = new Wallet(_walletName);
+    connection = new Connection("zzz");
+
+    wallet = connection.getAvailableConnection(_walletName);
     await wallet.init();
     var connectMenuButton = document.getElementById(id);
     document.getElementById("menuConnect_BTN").style.display = "none";
