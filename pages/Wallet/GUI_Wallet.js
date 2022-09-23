@@ -1,6 +1,3 @@
-var wallet;
-var tm;
-var ts;
 var activePage = "home";
 // Get arbitrary element with id "my-element"
 var elementToCheckIfClicksAreInsideOf = document.querySelector('#walletPopup_Div');
@@ -42,8 +39,6 @@ async function GUI_connectWallet(id, _walletName) {
     headerText.textContent ="Network: " + wallet.network_name;
     var headerText2=document.getElementById("header2_SPAN");
     headerText2.textContent ="Account:"+wallet.address;
-
-    tm = wallet.tm;
   } catch (err) {
     alertLogError(err, id);
     document.getElementById("ethereumAccountBalance_TX").value = "";

@@ -16,6 +16,7 @@ function addressFound(addr) {
 
 function addTableRow(tableId, addrKey) {
   if (!addressFound(addrKey)) {
+    tm = wallet.tm;
     var contract = tm.getTokenProperty(addrKey, "contract");
     addressMap.set(addrKey, contract);
     var table = document.getElementById(tableId);
