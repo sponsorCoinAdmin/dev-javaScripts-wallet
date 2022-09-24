@@ -31,7 +31,8 @@ class Connection {
 
   getAvailableWallet(_walletName) {
     this.validateWalletName(_walletName);
-    if (!this.connected() || !(this.wallet.walletName != _walletName))
+//  if (!this.connected() || !(this.wallet.walletName != _walletName))
+    if (!this.connected())
       this.connect(_walletName);
     return this.wallet;
   }
