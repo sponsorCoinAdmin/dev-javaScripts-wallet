@@ -1,21 +1,21 @@
 class TokenMap {
   constructor() {
-    this.addrMapObjs = new Map([]);
+    this.tokenMapObjects = new Map([]);
   }
 
   get(_address) {
-    var contract = this.addrMapObjs.get(_address)
+    var contract = this.tokenMapObjects.get(_address)
     return contract;
   }
 
   getTokenKeys() {
-    var tokenKeys = [...this.addrMapObjs.keys()];
+    var tokenKeys = [...this.tokenMapObjects.keys()];
     return tokenKeys;
   }
 
   setTokenProperty(address, propertyKey, propertyValue) {
     if (!isEmpty(address) && !isEmpty(propertyKey)) {
-      var token = this.addrMapObjs.get(address);
+      var token = this.tokenMapObjects.get(address);
       if (token == null || token == undefined || token == "")
         token = this.addNewAddressMapObject(address);
       if (token instanceof Map) {
@@ -29,7 +29,7 @@ class TokenMap {
   addNewAddressMapObject(_address) {
     var objMap = new Map();
     objMap.set("address", _address)
-    this.addrMapObjs.set(_address, objMap);
+    this.tokenMapObjects.set(_address, objMap);
     return objMap;
   }
 
@@ -70,8 +70,20 @@ class TokenMap {
   getTokenMapValues(address) {
     var tokenMap;
     if (!isEmpty(address)) {
-      tokenMap = this.addrMapObjs.get(address);
+      tokenMap = this.tokenMapObjects.get(address);
     }
     return tokenMap;
   }
+
+  toString() {
+    let text = "";
+    for (const entry of this.tokenMapObjects.entries()) {
+        text += "Contract: " + entry[0] + ":\n";
+        for (const val of entry[1].entries())
+        text += "            " + val + ":\n";
+      }
+    return(text);
+  }
 }
+
+
