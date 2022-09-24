@@ -94,7 +94,7 @@ class ContractWrap {
         );
       }
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
     return contract;
   }
@@ -149,7 +149,7 @@ class ContractWrap {
       balance = await this.contract.balanceOf(accountAddress);
       return balance;
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
   }
 }
@@ -172,7 +172,7 @@ async function connectValidContract(_address) {
     return contract;
   } catch (err) {
     contract = undefined;
-    processError(err);
+    alertLogErrorMessage(err);
   }
 }
 
@@ -203,7 +203,7 @@ async function sendToAccount(addr) {
       }
     }
   } catch (err) {
-    processError(err);
+    alertLogErrorMessage(err);
   }
 }
 
@@ -222,6 +222,6 @@ async function OLD_sendTokensToAccount(addr, tokenAmount) {
       }
     }
   } catch (err) {
-    processError(err);
+    alertLogErrorMessage(err);
   }
 }

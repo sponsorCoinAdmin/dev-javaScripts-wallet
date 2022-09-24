@@ -15,6 +15,8 @@ function addressFound(addr) {
 }
 
 function addTableRow(tableId, addrKey) {
+  validateConnection();
+  wallet = connection.getWallet();
   if (!addressFound(addrKey)) {
     tm = wallet.tm;
     var contract = tm.getTokenProperty(addrKey, "contract");

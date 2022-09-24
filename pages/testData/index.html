@@ -40,14 +40,26 @@
 
 <script>
   function loadContractsFromTable(tableId, colIdx) {
-    var contracts = loadColumnValuesAsSet(tableId, colIdx);
-    loadContractsFromSet(contracts);
+    try {
+      validateConnection()
+      var contracts = loadColumnValuesAsSet(tableId, colIdx);
+      loadContractsFromSet(contracts);
+    } catch (err) {
+      alertLogError(err);
+    }
+
   }
 
   function loadContractsFromSet(contracts) {
-    for (const addr of contracts.values()) {
-      // alert(addr)
-      addContractAddress(addr);
+    try {
+      validateConnection()
+      for (const addr of contracts.values()) {
+        // alert(addr)
+        addContractAddress(addr);
+      }
+    } catch (err) {
+      alertLogError(err);
     }
+
   }
 </script>

@@ -1,33 +1,50 @@
-// let connection = new Connection();
+var connection;
+function getWallet(_walletName) {
+  connection = connection == undefined ? new Connection(_walletName) : connection;
+  return connection.getAvailableWallet(_walletName);
+}
+
+function getConnection(_walletName) {
+  return connection == undefined ? new Connection(_walletName) : connection;
+}
+
+function validateConnection() {
+  if (connection == undefined) {
+    var msg = "CONNECTION ERROR: NOT CONNECTED";
+    throw { name: "validateConnection", message: msg };
+  } 
+}
 
 class Connection {
-  constructor (_walletName) {
-    this.defaultWalletName = _walletName == undefined ? "METAMASK" : _walletName;
+  constructor(_walletName) {
+    this.defaultWalletName =
+      _walletName == undefined ? "METAMASK" : _walletName;
   }
 
   connected() {
     return this.wallet == undefined ? false : true;
   }
 
-  getWallet () {
+  getWallet() {
     return this.wallet;
   }
 
-  getAvailableConnection (_walletName) {
-    this.validateWalletName (_walletName);
+  getAvailableWallet(_walletName) {
+    this.validateWalletName(_walletName);
     if (!this.connected() || !(this.wallet.walletName != _walletName))
-      this.connect (_walletName);
+      this.connect(_walletName);
     return this.wallet;
   }
 
-  connect (_walletName) {
-    this.validateWalletName (_walletName);
+  connect(_walletName) {
+    this.validateWalletName(_walletName);
     this.wallet = new Wallet(_walletName);
     return this.wallet;
   }
 
-  validateWalletName (_walletName) {
-    this.walletName = _walletName == undefined ? this.defaultWalletName: _walletName;
+  validateWalletName(_walletName) {
+    this.walletName =
+      _walletName == undefined ? this.defaultWalletName : _walletName;
   }
 }
 
@@ -41,37 +58,46 @@ class Wallet {
       this.symbol = "ETH";
       this.tm = new TokenMap();
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
   }
 
   async init() {
     try {
       this.provider = this.connectValidWalletProvider(this.walletName);
-      await this.provider.send("eth_requestAccounts", []).then(requestAccounts => {this.eth_requestAccounts = requestAccounts})
-      .catch(error => {throw error});
+      await this.provider
+        .send("eth_requestAccounts", [])
+        .then((requestAccounts) => {
+          this.eth_requestAccounts = requestAccounts;
+        })
+        .catch((error) => {
+          throw error;
+        });
       this.address = this.eth_requestAccounts.toString();
       this.signer = await provider.getSigner();
       this.network = await provider.getNetwork();
-      this.network_name  = this.network.name;
+      this.network_name = this.network.name;
       this.balance = await this.getEthereumAccountBalance();
       this.totalSupply = await this.signer.getBalance();
       this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
       var tokenMapValues = this.tm.mapWalletObjectByAddressKey(this);
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
       throw err;
     }
     return tokenMapValues;
   }
- 
+
   async getContractMapByAddressKey(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
     // check if contract exists
     if (contractMap == undefined) {
       // Contract not found. Create new contract
-      contractMap = await this.addNewTokenContractToMap(_addressKey, SPCOIN_ABI);
+      contractMap = await this.addNewTokenContractToMap(
+        _addressKey,
+        SPCOIN_ABI
+      );
     }
     return contractMap;
   }
@@ -81,17 +107,17 @@ class Wallet {
     try {
       var abi = _ABI == undefined ? SPCOIN_ABI : _ABI;
       var contract = new ethers.Contract(_contractAddress, abi, this.signer);
-      await this.setContractValues (contract);
+      await this.setContractValues(contract);
 
       //contractMap = this.tm.mapWalletObjectByAddressKey(contract);
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
       throw err;
     }
     return contractMap;
   }
 
-  async setContractValues (contract) {
+  async setContractValues(contract) {
     var contractAddressKey = contract.address;
     var values = await Promise.all([
       contract.name(),
@@ -113,13 +139,13 @@ class Wallet {
     outputStr += " decimals " + decimals + "\n";
     outputStr += " balanceOf " + balanceOf + "\n";
     alert("Loaded Token\n" + outputStr);
-    this.tm.setTokenProperty(contractAddressKey, "contract",    contract);
-    this.tm.setTokenProperty(contractAddressKey, "name",        name);
-    this.tm.setTokenProperty(contractAddressKey, "symbol",      symbol);
+    this.tm.setTokenProperty(contractAddressKey, "contract", contract);
+    this.tm.setTokenProperty(contractAddressKey, "name", name);
+    this.tm.setTokenProperty(contractAddressKey, "symbol", symbol);
     this.tm.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
-    this.tm.setTokenProperty(contractAddressKey, "decimals",    decimals);
+    this.tm.setTokenProperty(contractAddressKey, "decimals", decimals);
     this.tm.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
-    this.tm.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
+    this.tm.setTokenProperty(contractAddressKey, "balanceOf", balanceOf);
   }
 
   connectValidWalletProvider(_walletName) {
@@ -136,7 +162,7 @@ class Wallet {
       }
       return provider;
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
   }
 
@@ -148,11 +174,14 @@ class Wallet {
           provider = connectMetaMask();
           break;
         default:
-          throw { "name": "Unknown Provider", "message": "Cannot connect to Wallet Provider " + _walletName };
+          throw {
+            name: "Unknown Provider",
+            message: "Cannot connect to Wallet Provider " + _walletName,
+          };
       }
       //this.accountList = provider.send("eth_requestAccounts", []);
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
     return provider;
   }
@@ -163,7 +192,7 @@ class Wallet {
       this.address = await this.signer.getAddress();
       return this.address;
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
   }
 
@@ -179,7 +208,7 @@ class Wallet {
       ethbalance = balance.toString() / decimals;
       console.log("account's balance in ether:", ethbalance);
     } catch (err) {
-      processError(err);
+      alertLogErrorMessage(err);
     }
     return ethbalance;
   }
@@ -190,7 +219,7 @@ function connectMetaMask() {
     // MetaMask requires requesting permission to connect users accounts
     provider = new ethers.providers.Web3Provider(window.ethereum);
   } catch (err) {
-    processError(err);
+    alertLogErrorMessage(err);
     throw err;
   }
   return provider;
