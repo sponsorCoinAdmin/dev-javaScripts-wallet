@@ -51,43 +51,35 @@ class Connection {
 class Wallet {
   constructor(_walletName) {
     try {
-      this.walletName = _walletName;
       this.decimals = 18;
       this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
       this.tm = new TokenMap();
+      this.walletName = _walletName;
     } catch (err) {
-      alertLogErrorMessage(err);
+      processError(err);
     }
   }
 
   async init() {
     try {
       this.provider = this.connectValidWalletProvider(this.walletName);
-      await this.provider
-        .send("eth_requestAccounts", [])
-        .then((requestAccounts) => {
-          this.eth_requestAccounts = requestAccounts;
-        })
-        .catch((error) => {
-          throw error;
-        });
+      await this.provider.send("eth_requestAccounts", []).then(requestAccounts => {this.eth_requestAccounts = requestAccounts})
+      .catch(error => {throw error});
       this.address = this.eth_requestAccounts.toString();
       this.signer = await provider.getSigner();
       this.network = await provider.getNetwork();
-      this.network_name = this.network.name;
-      this.balance = await this.getEthereumAccountBalance();
-      this.totalSupply = await this.signer.getBalance();
-      this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
-      var tokenMapValues = this.tm.mapWalletObjectByAddressKey(this);
-    } catch (err) {
-      alertLogErrorMessage(err);
+      this.network_name  = this.network.name;
+      this.balance = await this.signer.getBalance();
+      this.ethBalance = await this.getEthereumAccountBalance();
+      this.dump();
+     } catch (err) {
+      processError(err);
       throw err;
     }
-    return tokenMapValues;
   }
-  
+
   dump() {
     var walletToString = this.toString();
     alert(walletToString);
@@ -123,16 +115,35 @@ class Wallet {
     return walletMapValues;
   }
 
+  getTokenMapValues(tokenMapValues) {
+    let text = "";
+    for (const x of tokenMapValues.entries()) {
+      text += x + "\n";
+    }
+    return text;
+  }
+
+  async getEthereumAccountBalance() {
+    const decimals = 1e18;
+    var ethbalance;
+    try {
+      const balance = await this.signer.getBalance();
+      ethbalance = weiToToken(balance, this.decimals);
+      console.log("account's balance in ether:", ethbalance);
+    } catch (err) {
+      processError(err);
+    }
+    return ethbalance;
+  }
+
+   
   async getContractMapByAddressKey(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
     // check if contract exists
     if (contractMap == undefined) {
       // Contract not found. Create new contract
-      contractMap = await this.addNewTokenContractToMap(
-        _addressKey,
-        SPCOIN_ABI
-      );
+      contractMap = await this.addNewTokenContractToMap(_addressKey, SPCOIN_ABI);
     }
     return contractMap;
   }
@@ -142,17 +153,17 @@ class Wallet {
     try {
       var abi = _ABI == undefined ? SPCOIN_ABI : _ABI;
       var contract = new ethers.Contract(_contractAddress, abi, this.signer);
-      await this.setContractValues(contract);
+      await this.setContractValues (contract);
 
       //contractMap = this.tm.mapWalletObjectByAddressKey(contract);
     } catch (err) {
-      alertLogErrorMessage(err);
+      processError(err);
       throw err;
     }
     return contractMap;
   }
 
-  async setContractValues(contract) {
+  async setContractValues (contract) {
     var contractAddressKey = contract.address;
     var values = await Promise.all([
       contract.name(),
@@ -174,13 +185,13 @@ class Wallet {
     outputStr += " decimals " + decimals + "\n";
     outputStr += " balanceOf " + balanceOf + "\n";
     alert("Loaded Token\n" + outputStr);
-    this.tm.setTokenProperty(contractAddressKey, "contract", contract);
-    this.tm.setTokenProperty(contractAddressKey, "name", name);
-    this.tm.setTokenProperty(contractAddressKey, "symbol", symbol);
+    this.tm.setTokenProperty(contractAddressKey, "contract",    contract);
+    this.tm.setTokenProperty(contractAddressKey, "name",        name);
+    this.tm.setTokenProperty(contractAddressKey, "symbol",      symbol);
     this.tm.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
-    this.tm.setTokenProperty(contractAddressKey, "decimals", decimals);
+    this.tm.setTokenProperty(contractAddressKey, "decimals",    decimals);
     this.tm.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
-    this.tm.setTokenProperty(contractAddressKey, "balanceOf", balanceOf);
+    this.tm.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
   }
 
   connectValidWalletProvider(_walletName) {
@@ -197,7 +208,7 @@ class Wallet {
       }
       return provider;
     } catch (err) {
-      alertLogErrorMessage(err);
+      processError(err);
     }
   }
 
@@ -209,14 +220,11 @@ class Wallet {
           provider = connectMetaMask();
           break;
         default:
-          throw {
-            name: "Unknown Provider",
-            message: "Cannot connect to Wallet Provider " + _walletName,
-          };
+          throw { "name": "Unknown Provider", "message": "Cannot connect to Wallet Provider " + _walletName };
       }
       //this.accountList = provider.send("eth_requestAccounts", []);
     } catch (err) {
-      alertLogErrorMessage(err);
+      processError(err);
     }
     return provider;
   }
@@ -227,7 +235,7 @@ class Wallet {
       this.address = await this.signer.getAddress();
       return this.address;
     } catch (err) {
-      alertLogErrorMessage(err);
+      processError(err);
     }
   }
 
@@ -235,19 +243,8 @@ class Wallet {
     this.tm.setTokenProperty(_address, _propertyKey, _propertyValue);
   }
 
-  async getEthereumAccountBalance() {
-    const decimals = 1e18;
-    var ethbalance;
-    try {
-      const balance = await this.signer.getBalance();
-      ethbalance = balance.toString() / decimals;
-      console.log("account's balance in ether:", ethbalance);
-    } catch (err) {
-      alertLogErrorMessage(err);
-    }
-    return ethbalance;
-  }
 }
+
 
 function connectMetaMask() {
   try {
