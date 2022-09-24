@@ -73,7 +73,6 @@ class Wallet {
       this.network_name  = this.network.name;
       this.balance = await this.signer.getBalance();
       this.ethBalance = await this.getEthereumAccountBalance();
-      this.dump();
      } catch (err) {
       processError(err);
       throw err;
@@ -185,13 +184,13 @@ class Wallet {
     outputStr += " decimals " + decimals + "\n";
     outputStr += " balanceOf " + balanceOf + "\n";
     alert("Loaded Token\n" + outputStr);
-    this.tm.setTokenProperty(contractAddressKey, "contract",    contract);
-    this.tm.setTokenProperty(contractAddressKey, "name",        name);
-    this.tm.setTokenProperty(contractAddressKey, "symbol",      symbol);
-    this.tm.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
-    this.tm.setTokenProperty(contractAddressKey, "decimals",    decimals);
-    this.tm.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
-    this.tm.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
+    this.setTokenProperty(contractAddressKey, "contract",    contract);
+    this.setTokenProperty(contractAddressKey, "name",        name);
+    this.setTokenProperty(contractAddressKey, "symbol",      symbol);
+    this.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
+    this.setTokenProperty(contractAddressKey, "decimals",    decimals);
+    this.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
+    this.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
   }
 
   connectValidWalletProvider(_walletName) {
