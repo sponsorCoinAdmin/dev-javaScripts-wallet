@@ -55,17 +55,6 @@ async function GUI_AddTokenContract(id) {
   }
 }
 
-async function addContractAddress(addrKey) {
-  try {
-    validateConnection();
-    var wallet = getWallet();
-    contractMap = await wallet.getContractMapByAddressKey(addrKey);
-    addTableRow("assetsTable", addrKey);
-  } catch (err) {
-    alertLogError(err, addrKey);
-  }
-  return contractMap;
-}
 
 async function GUI_getActiveAccount(id) {
   try {
@@ -154,4 +143,16 @@ function activateDiv(menuId, elementClass) {
   } catch (err) {
     alertLogError(err);
   }
+}
+
+async function addContractAddress(addrKey) {
+  try {
+    validateConnection();
+    var wallet = getWallet();
+    contractMap = await wallet.getContractMapByAddressKey(addrKey);
+    addTableRow("assetsTable", addrKey);
+  } catch (err) {
+    alertLogError(err, addrKey);
+  }
+  return contractMap;
 }

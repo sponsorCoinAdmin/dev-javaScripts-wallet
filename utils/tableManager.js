@@ -36,8 +36,11 @@ function addTableRow(tableId, addrKey) {
 }
 
 function populateContractProperties(tokenSymbol) {
+  validateConnection();
+  var wallet = connection.getWallet();
+  var tm = wallet.tm;
   var addressKey;
-  for (let [addrKey] of tm.addrMapObjs) {
+  for (let [addrKey] of tm.tokenMapObjects) {
     var searchSymbol = tm.getTokenProperty(addrKey, "symbol");
    
     if (tokenSymbol == searchSymbol) {
