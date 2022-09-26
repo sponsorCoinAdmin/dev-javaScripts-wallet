@@ -31,7 +31,8 @@ class Connection {
 
   getAvailableWallet(_walletName) {
     this.validateWalletName(_walletName);
-    if (!this.connected() || !(this.wallet.walletName != _walletName))
+//  if (!this.connected() || !(this.wallet.walletName != _walletName))
+    if (!this.connected())
       this.connect(_walletName);
     return this.wallet;
   }
@@ -51,12 +52,13 @@ class Connection {
 class Wallet {
   constructor(_walletName) {
     try {
+      this.walletName = _walletName;
+      this.provider = this.connectValidWalletProvider(this.walletName);
       this.decimals = 18;
       this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
       this.tm = new TokenMap();
-      this.walletName = _walletName;
     } catch (err) {
       processError(err);
     }
@@ -64,7 +66,7 @@ class Wallet {
 
   async init() {
     try {
-      this.provider = this.connectValidWalletProvider(this.walletName);
+      
       await this.provider.send("eth_requestAccounts", []).then(requestAccounts => {this.eth_requestAccounts = requestAccounts})
       .catch(error => {throw error});
       this.address = this.eth_requestAccounts.toString();
@@ -73,7 +75,6 @@ class Wallet {
       this.network_name  = this.network.name;
       this.balance = await this.signer.getBalance();
       this.ethBalance = await this.getEthereumAccountBalance();
-      this.dump();
      } catch (err) {
       processError(err);
       throw err;
@@ -157,8 +158,11 @@ class Wallet {
 
       //contractMap = this.tm.mapWalletObjectByAddressKey(contract);
     } catch (err) {
-      processError(err);
-      throw err;
+      console.log(err);
+      var msg = "Token symbol not found: " + this.name + " (" + this.symbol + ")"
+      msg += "\nContract: " + _contractAddress;
+      msg += "\nNetwork: " + this.network_name;
+      throw { name: "addNewTokenContractToMap", message: msg };
     }
     return contractMap;
   }
@@ -184,14 +188,14 @@ class Wallet {
     outputStr += " totalSupply " + totalSupply + "\n";
     outputStr += " decimals " + decimals + "\n";
     outputStr += " balanceOf " + balanceOf + "\n";
-    alert("Loaded Token\n" + outputStr);
-    this.tm.setTokenProperty(contractAddressKey, "contract",    contract);
-    this.tm.setTokenProperty(contractAddressKey, "name",        name);
-    this.tm.setTokenProperty(contractAddressKey, "symbol",      symbol);
-    this.tm.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
-    this.tm.setTokenProperty(contractAddressKey, "decimals",    decimals);
-    this.tm.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
-    this.tm.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
+    console.log("Loaded Token\n" + outputStr);
+    this.setTokenProperty(contractAddressKey, "contract",    contract);
+    this.setTokenProperty(contractAddressKey, "name",        name);
+    this.setTokenProperty(contractAddressKey, "symbol",      symbol);
+    this.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);
+    this.setTokenProperty(contractAddressKey, "decimals",    decimals);
+    this.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
+    this.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
   }
 
   connectValidWalletProvider(_walletName) {

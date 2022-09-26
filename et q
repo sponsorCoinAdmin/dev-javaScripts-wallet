@@ -1,0 +1,259 @@
+[33mcommit 859c2a743b95def2c5ce61a5ef928842b7662252[m[33m ([m[1;36mHEAD -> [m[1;32mwallet-0003[m[33m, [m[1;31morigin/wallet-0003[m[33m)[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 25 20:36:25 2022 -0400
+
+    WIP
+
+[33mcommit 2642109e710088b116b0b304a89478a5ffea193e[m[33m ([m[1;31morigin/wallet-0002[m[33m, [m[1;31morigin/masterBAK_20220924_Add_Dump[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mwallet-0002[m[33m, [m[1;32mmaster[m[33m)[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 24 12:52:34 2022 -0400
+
+    Fix wallet.dump()
+
+[33mcommit db910fbf641c3144a548798b4696b1925a083d81[m
+Merge: fa613f4 1ad3f72
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 24 12:14:41 2022 -0400
+
+    Merge branch 'master' into wallet-0002
+
+[33mcommit 1ad3f72fe9d3289d69c9575438f65a34bde768b6[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 24 11:35:32 2022 -0400
+
+    WIP
+
+[33mcommit 882eda5aff75792d8ba3fbcc1c7d139b18508766[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 24 01:14:49 2022 -0400
+
+    wallet Fix WIP
+
+[33mcommit be367ccc59281db2b70b138d41b54a2e7b230139[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 24 01:00:36 2022 -0400
+
+    Fix dump WIP
+
+[33mcommit dfa2f6901c52fd1256ee367f246bbe1eda44df3d[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 24 00:44:44 2022 -0400
+
+    Fix connected
+
+[33mcommit efa735d9743a588b038db375cdf3fbb998f50971[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Fri Sep 23 02:44:26 2022 -0400
+
+    Add Connection Class
+
+[33mcommit 796e69bd633e02c3cc84e3a1c919fd063307be0d[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Fri Sep 23 01:13:31 2022 -0400
+
+    Clean up code
+
+[33mcommit 6c2a2e92b7294913fdbd6d6033c84aea5c7bdd3a[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Thu Sep 22 13:48:14 2022 -0400
+
+    Fix Token Dump
+
+[33mcommit dff359b998d466c5c7f2128935ba99589f1788d2[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Thu Sep 22 10:35:00 2022 -0400
+
+    Add Wallet.toString()
+
+[33mcommit f5b9391febafb960ea4cac5940ccc8bc2be279f0[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Thu Sep 22 03:11:47 2022 -0400
+
+    Add new Wallet Map
+
+[33mcommit 50127fdd116b66e7b00c441c8f43c579c9dd9852[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Wed Sep 21 21:12:43 2022 -0400
+
+    Cleanup
+
+[33mcommit fa613f4e59a2deac351f3931cf9ca1c5471321e5[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Wed Sep 21 15:21:31 2022 -0400
+
+    WIP
+
+[33mcommit 3343f8aad3a8d028175c6a1d7bd219d827e4e190[m
+Merge: f3fc8db 6d99f5f
+Author: sponsorCoinAdmin <sponsorCoinAdmin@proton.me>
+Date:   Wed Sep 21 14:59:31 2022 -0400
+
+    Merge pull request #5 from sponsorCoinAdmin/wallet-0001
+    
+    Wallet 0001
+
+[33mcommit 6d99f5fd5757a6a47513f13f837fd8adb682e600[m[33m ([m[1;31morigin/wallet-0001[m[33m)[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Wed Sep 21 01:13:09 2022 -0400
+
+    WIP
+
+[33mcommit 2d50b4958c63f49ac11a9e656f2504bcb298e2a5[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Tue Sep 20 23:32:25 2022 -0400
+
+    WIP
+
+[33mcommit f7790c3978a409912b6f93b19498b5f4e8a43900[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Thu Sep 15 15:24:15 2022 -0400
+
+    WIP
+
+[33mcommit f264264a266bf7ea44aba2ffa71f6dc34fc74a97[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Mon Sep 12 14:53:55 2022 -0400
+
+    WIP
+
+[33mcommit df4729d1d9eab456bbf47460cd6733da33674e30[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Mon Sep 12 01:49:26 2022 -0400
+
+    WIP BalanceOf
+
+[33mcommit f3fc8db1a6da49b1fed52849d32d0d56cc1dfc62[m[33m ([m[1;31morigin/masterBAK_20220921[m[33m)[m
+Merge: 9626654 bc1d134
+Author: sponsorCoinAdmin <sponsorCoinAdmin@proton.me>
+Date:   Sun Sep 11 16:00:10 2022 -0400
+
+    Merge pull request #3 from sponsorCoinAdmin/wallet-0001
+    
+    Wallet 0001
+
+[33mcommit bc1d134ddfffefede9a2998948762a33ef0be790[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 11 15:44:16 2022 -0400
+
+    Merge Master
+
+[33mcommit 8a524c90dacb251df19bb77180d9732f57def38b[m
+Merge: 34acf89 9626654
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 11 15:36:42 2022 -0400
+
+    Merge branch 'master' into wallet-0001
+
+[33mcommit 34acf893cf9c66fbbd57342075fc5b381978b08f[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 11 02:10:07 2022 -0400
+
+    Fix Contract Data Display
+
+[33mcommit f309e244f3522dcfb2d45becb68e0fa433bd3043[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 10 19:08:31 2022 -0400
+
+    WIP
+
+[33mcommit 7f18ce3c712d79a838bbc24de4f863125294939b[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sat Sep 10 18:46:03 2022 -0400
+
+    Major Changes to Design of Wallet
+
+[33mcommit 1417a8b5683e59c8113eb9d7e503e8c7dadc8e07[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Tue Sep 6 13:16:27 2022 -0400
+
+    Fix Up Test Data
+
+[33mcommit 883add75387f815e88d8a9f3e7a6c95e772aee68[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Tue Sep 6 00:07:00 2022 -0400
+
+    Wallet CleanUp
+
+[33mcommit 4665f2dd48f321ae04fa16ec06d032d74b88c408[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Mon Sep 5 23:48:44 2022 -0400
+
+    Button Management
+
+[33mcommit 06d28df021a27cfe2cbafc2f7c1f4e938c5d4bc2[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Mon Sep 5 14:17:02 2022 -0400
+
+    Fix Import Token
+
+[33mcommit 20409e92bdb50457cc06dce7c946b37221dcc274[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Mon Sep 5 13:28:43 2022 -0400
+
+    Fix DropDown Selection
+
+[33mcommit 96266541f7a12a07fa5ef79cc8b5211d3be2c7f5[m[33m ([m[1;31morigin/masterBAK_20220911[m[33m)[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 19:07:48 2022 -0400
+
+    Final Test Push
+
+[33mcommit f87c664058df05c833aabf282b434ca2e16a6665[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 19:06:50 2022 -0400
+
+    Test Push
+
+[33mcommit 802886b991e66d734f250957d82afd83ba0e8afa[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 18:59:16 2022 -0400
+
+    aSD
+
+[33mcommit 5f51b1a8e4e6ead756c82d2e4bc19e6d85dbd332[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 18:56:11 2022 -0400
+
+    asda
+
+[33mcommit d87bb178590c095434fca961efc72938be3eb22b[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 18:54:32 2022 -0400
+
+    Tester
+
+[33mcommit 81f1966e9da822714f6ec13d207296179a84f05e[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 18:52:00 2022 -0400
+
+    Test Push
+
+[33mcommit 5f0ffa58c0f772f413e1193205bde0d1ffd96b22[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 16:23:57 2022 -0400
+
+    WIP
+
+[33mcommit fefd4e04577d4e6b0d72e4e9b9a0045a0fd15ab4[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Sun Sep 4 10:38:56 2022 -0400
+
+    Fix it commit
+
+[33mcommit da65d663403a665ea1ead74839175fc16503b8b0[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Fri Sep 2 21:31:02 2022 -0400
+
+    Initial Release
+
+[33mcommit 9aab8e0cab9d3295300442c1c069c4535edd59bf[m
+Author: sponsorCoinAdmin <sponsorcoin@protonmail.com>
+Date:   Fri Sep 2 21:16:52 2022 -0400
+
+    Initial Release
+
+[33mcommit 5a1d1ed286ac100f63e4f6b1b72c656a4c911aa3[m
+Author: sponsorCoinAdmin <sponsorCoinAdmin@proton.me>
+Date:   Fri Sep 2 20:59:54 2022 -0400
+
+    Create README.md

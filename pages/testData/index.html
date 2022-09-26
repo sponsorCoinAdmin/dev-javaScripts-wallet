@@ -35,31 +35,5 @@
 <p>
   <button type="button" onclick="addNewTestToken('testTable')">Add Token</button>
   <input type="text" id="newTokenAddress_TX" />
-  <button type="button" onclick="loadContractsFromTable('testTable', 2)">Load Test Data</button>
+  <button type="button" onclick="GUI_loadContractsFromTable('testTable', 2)">Load Test Data</button>
 </p>
-
-<script>
-  function loadContractsFromTable(tableId, colIdx) {
-    try {
-      validateConnection()
-      var contracts = loadColumnValuesAsSet(tableId, colIdx);
-      loadContractsFromSet(contracts);
-    } catch (err) {
-      alertLogError(err);
-    }
-
-  }
-
-  function loadContractsFromSet(contracts) {
-    try {
-      validateConnection()
-      for (const addr of contracts.values()) {
-        // alert(addr)
-        addContractAddress(addr);
-      }
-    } catch (err) {
-      alertLogError(err);
-    }
-
-  }
-</script>
