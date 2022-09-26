@@ -67,7 +67,6 @@ async function addContractAddress(addrKey) {
   return contractMap;
 }
 
-// 2. Connect Active Account
 async function GUI_getActiveAccount(id) {
   try {
     // MetaMask requires requesting permission to connect users accounts
@@ -133,11 +132,6 @@ function showElementsByClass(className) {
 function activateMenuDiv(menuId) {
   hideElementsByClass("menu_Class");
   showElementById(menuId);
-}
-
-function activateMenuDiv2(menuId) {
-  var elementClass = "menu_Class";
-  activateDiv(menuId, elementClass)
 }
 
 function activateWalletBodyDiv(walletId) {

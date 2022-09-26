@@ -43,23 +43,11 @@
     try {
       validateConnection()
       var contracts = loadColumnValuesAsSet(tableId, colIdx);
-      loadContractsFromSet(contracts);
-    } catch (err) {
-      alertLogError(err);
-    }
-
-  }
-
-  function loadContractsFromSet(contracts) {
-    try {
-      validateConnection()
       for (const addr of contracts.values()) {
-        // alert(addr)
         addContractAddress(addr);
       }
     } catch (err) {
       alertLogError(err);
     }
-
   }
 </script>
