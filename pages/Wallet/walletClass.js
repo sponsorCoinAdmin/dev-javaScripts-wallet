@@ -129,7 +129,7 @@ class Wallet {
     var ethbalance;
     try {
       const balance = await this.signer.getBalance();
-      ethbalance = weiToToken(balance, this.decimals);
+      ethbalance = weiToAmount(balance, this.decimals);
       console.log("account's balance in ether:", ethbalance);
     } catch (err) {
       processError(err);
@@ -180,7 +180,7 @@ class Wallet {
     var symbol = values[1];
     var totalSupply = values[2];
     var decimals = values[3];
-    var tokenSupply = weiToToken(totalSupply, decimals);
+    var tokenSupply = weiToAmount(totalSupply, decimals);
     var balanceOf = await contract.balanceOf(this.address);
 
     var outputStr = "name = " + name + "\n";

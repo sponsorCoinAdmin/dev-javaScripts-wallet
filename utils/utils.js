@@ -52,13 +52,13 @@ function toggle(elmtStr) {
   }
 }
 
-function weiToToken(wei, decimals) {
+function weiToAmount(wei, decimals) {
   var mod = 10 ** decimals;
   var tokens = wei / mod;
   return tokens;
 }
 
-function tokensToWei(tokens, decimals) {
+function amountToWei(tokens, decimals) {
   var mod = 10 ** decimals;
   var wei = tokens * mod;
   return wei;

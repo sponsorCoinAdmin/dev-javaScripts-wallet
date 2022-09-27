@@ -61,7 +61,7 @@ class ContractWrap {
       alert("balanceOf() = " + this.balance);
       var account = await contract.getAccount(this.address);
       alert("getBalance() = " + this.balance);
-      this.tokenSupply = weiToToken(this.totalSupply, this.decimals);
+      this.tokenSupply = weiToAmount(this.totalSupply, this.decimals);
     } catch (err) {
       var msg = "** Error Contract Creation\n";
       msg += "Invalad Address: " + this.address;

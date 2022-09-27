@@ -24,12 +24,13 @@ function addTableRow(tableId, addrKey) {
     var table = document.getElementById(tableId);
     var tokenSymbol = tm.getTokenProperty(addrKey, "symbol");
     var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
+    var decimals = tm.getTokenProperty(addrKey, "decimals");
     var row = table.insertRow(1);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     cell1.innerHTML = tokenSymbol;
     cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+tokenSymbol+"')\">"+tokenSymbol+"</a>"
-    cell2.innerHTML = balanceOf;
+    cell2.innerHTML =  weiToAmount(balanceOf, decimals);;
     return true;
   }
   return false;
