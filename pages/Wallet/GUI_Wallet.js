@@ -28,12 +28,12 @@ async function GUI_connectWallet(id, _walletName) {
     var wallet = getValidWallet(_walletName);
 
     validateConnection();
-    await wallet.init();
+    await wallet.initConnection();
     document.getElementById("menuConnect_BTN").style.display = "none";
     document.getElementById("menuConnected_BTN").style.display = "block";
     changeElementIdColor("menuConnected_BTN", "green");
     var headerText=document.getElementById("header_SPAN");
-    headerText.textContent ="Network: " + wallet.network_name;
+    headerText.textContent ="Network: " + wallet.getNetworkName();
     var headerText2=document.getElementById("header2_SPAN");
     headerText2.textContent ="Account:"+wallet.address;
   } catch (err) {

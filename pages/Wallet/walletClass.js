@@ -55,7 +55,6 @@ class Wallet {
       this.walletName = _walletName;
       this.provider = this.connectValidWalletProvider(this.walletName);
       this.decimals = 18;
-      this.eth_requestAccounts;
       this.name = "Ethereum";
       this.symbol = "ETH";
       this.tm = new TokenMap();
@@ -64,23 +63,23 @@ class Wallet {
     }
   }
 
-  async init() {
+  async initConnection() {
     try {
-      
-      await this.provider.send("eth_requestAccounts", []).then(requestAccounts => {this.eth_requestAccounts = requestAccounts})
-      .catch(error => {throw error});
-      this.address = this.eth_requestAccounts.toString();
-      this.signer = await provider.getSigner();
-      this.network = await provider.getNetwork();
-      this.network_name  = this.network.name;
+      this.eth_requestAccounts = await provider.send("eth_requestAccounts", []);
+      this.signer = await this.provider.getSigner();
+      this.address = await this.signer.getAddress();
+      this.network = await this.provider.getNetwork();
       this.balance = await this.signer.getBalance();
       this.ethBalance = await this.getEthereumAccountBalance();
-      var ethAmount = this.getEthAmount();
-      insertTableRow("assetsTable", this.symbol, ethAmount, 1);
+      insertTableRow("assetsTable", this.symbol, this.getEthAmount(), 1);
      } catch (err) {
       processError(err);
       throw err;
     }
+  }
+
+  getNetworkName() {
+    return this.network.name;
   }
 
   getEthAmount() {
@@ -112,7 +111,7 @@ class Wallet {
     var walletMapValues = new Map([]);
     walletMapValues.set("Wallet", this.walletName);
     walletMapValues.set("Account Address", this.address);
-    walletMapValues.set("Network_Name", this.network_name);
+    walletMapValues.set("Network Name", this.getNetworkName());
     walletMapValues.set("name", this.name);
     walletMapValues.set("symbol", this.symbol);
     walletMapValues.set("balance", this.balance);
@@ -166,7 +165,7 @@ class Wallet {
       console.log(err);
       var msg = "Token symbol not found: " + this.name + " (" + this.symbol + ")"
       msg += "\nContract: " + _contractAddress;
-      msg += "\nNetwork: " + this.network_name;
+      msg += "\nNetwork: " + this.getNetworkName();
       throw { name: "addNewTokenContractToMap", message: msg };
     }
     return contractMap;
@@ -267,4 +266,14 @@ function connectMetaMask() {
     throw err;
   }
   return provider;
+}
+
+async function connectMetamask2() {
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  // MetaMask requires requesting permission to connect users accounts
+  await provider.send("eth_requestAccounts", []);
+
+  signer = await provider.getSigner();
+
+  console.log("Account address is:", await signer.getAddress());
 }

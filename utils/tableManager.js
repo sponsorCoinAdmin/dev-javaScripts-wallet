@@ -23,11 +23,11 @@ function populateContractProperties(symbol) {
     var searchSymbol = tm.getTokenProperty(addrKey, "symbol");
     if (symbol == searchSymbol) {
       addressKey = addrKey;
-      setContractProperties(addressKey)
+      setContractProperties(addressKey);
       break;
     }
   }
-  activateWalletBodyDiv('contract_DIV');
+  activateWalletBodyDiv("contract_DIV");
 }
 
 function setContractProperties(addressKey) {
@@ -46,7 +46,7 @@ function setContractProperties(addressKey) {
 
   var contract = tm.getTokenProperty(addressKey, "contract");
   getAccountBalanceOf(contract, contractAddress, "accountBalanceOf_TX");
-  activateWalletBodyDiv('contract_DIV');
+  activateWalletBodyDiv("contract_DIV");
 }
 
 function addNewTestToken(tableId) {
@@ -127,8 +127,7 @@ function addTableRow(tableId, addrKey) {
 }
 
 function insertTableRow(tableId, symbol, amount, row) {
-  if (row == undefined)
-    row = 2;
+  if (row == undefined) row = 2;
   var table = document.getElementById(tableId);
   var row = table.insertRow(row);
   var cell1 = row.insertCell(0);
@@ -136,4 +135,17 @@ function insertTableRow(tableId, symbol, amount, row) {
   cell1.innerHTML = symbol;
   cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+symbol+"')\">"+symbol+"</a>"
   cell2.innerHTML = amount;
+}
+
+function deleteTableRows(tableId) {
+  var table = document.getElementById(tableId);
+  while (table.rows.length > 0) {
+    table.deleteRow(0);
+  }
+}
+
+function deleteTableRow(tableId, rowId) {
+  var table = document.getElementById(tableId);
+    table.deleteRow(rowId);
+  }
 }
