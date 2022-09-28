@@ -13,6 +13,11 @@ class TokenMap {
     return tokenKeys;
   }
 
+  getContracts() {
+    var tokenKeys = this.getTokenKeys();
+    return new Set(tokenKeys);
+  }
+
   setTokenProperty(address, propertyKey, propertyValue) {
     if (!isEmpty(address) && !isEmpty(propertyKey)) {
       var token = this.tokenMapObjects.get(address);

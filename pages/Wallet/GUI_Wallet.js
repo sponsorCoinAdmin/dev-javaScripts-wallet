@@ -25,7 +25,7 @@ function GUI_initPage() {
 // 1. Connect Metamask with Dapp
 async function GUI_connectWallet(id, _walletName) {
   try {
-    var wallet = getWallet(_walletName);
+    var wallet = getValidWallet(_walletName);
 
     validateConnection();
     await wallet.init();
@@ -138,6 +138,24 @@ function activateDiv(menuId, elementClass) {
     validateConnection()
     var contracts = loadColumnValuesAsSet(tableId, colIdx);
     for (const addr of contracts.values()) {
+      //contractMap = await wallet.getContractMapByAddressKey(addrKey);
+
+      addContractAddress(addr);
+    }
+  } catch (err) {
+    alertLogError(err);
+  }
+}
+
+function GUI_loadContractsFromWallet(_wallet) {
+  try {
+    validateConnection();
+    var tableId = "assets_DIV";
+    var wallet = getValidWallet(_wallet);
+    var tm = wallet.tm;
+    var keys = tm.getTokenKeys();
+    var contracts = tm.getContracts();
+    for (const addr of contracts.values()) {
       addContractAddress(addr);
     }
   } catch (err) {
@@ -148,7 +166,7 @@ function activateDiv(menuId, elementClass) {
 async function addContractAddress(addrKey) {
   try {
     validateConnection();
-    var wallet = getWallet();
+    var wallet = getValidWallet();
     contractMap = await wallet.getContractMapByAddressKey(addrKey);
     addTableRow("assetsTable", addrKey);
   } catch (err) {

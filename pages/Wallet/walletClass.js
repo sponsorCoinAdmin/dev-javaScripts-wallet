@@ -1,5 +1,5 @@
 var connection;
-function getWallet(_walletName) {
+function getValidWallet(_walletName) {
   connection = connection == undefined ? new Connection(_walletName) : connection;
   return connection.getAvailableWallet(_walletName);
 }
@@ -25,7 +25,7 @@ class Connection {
     return this.wallet == undefined ? false : true;
   }
 
-  getWallet() {
+  getValidWallet() {
     return this.wallet;
   }
 
@@ -136,7 +136,6 @@ class Wallet {
     }
     return ethbalance;
   }
-
    
   async getContractMapByAddressKey(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);

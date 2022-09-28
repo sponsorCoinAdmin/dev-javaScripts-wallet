@@ -5,11 +5,12 @@
             onclick="popUpWindowCenter('walletPopup_Div')">WALLET</a>
         <div class="dropdown-content">
             <a href="#" onclick="activateWalletBodyDiv('WalletAdmin_Div')">ADMIN</a>
-            <a href="#" onclick="activateWalletBodyDiv('accounts_DIV')">DISPLAY ACCOUNT DATA</a>
+            <a href="#" onclick="activateWalletBodyDiv('assets_DIV')">DISPLAY ACCOUNT DATA</a>
             <a href="#" onclick="activateWalletBodyDiv('contract_DIV')">DISPLAY CONTRACT DATA</a>
             <a href="#" onclick="activateWalletBodyDiv('inportTokens_DIV')">IMPORT TOKENS</a>
+            <a href="#" onclick="GUI_loadContractsFromWallet('getValidWallet()', 2)">LOAD WALLET DATA</a>
             <a href="#" onclick="GUI_loadContractsFromTable('testTable', 2)">LOAD TEST DATA</a>
-            <a href="#" onclick="getWallet('METAMASK').dump()">DUMP WALLET</a>
+            <a href="#" onclick="getValidWallet('METAMASK').dump()">DUMP WALLET</a>
             <a href="#" onclick="activateWalletBodyDiv('walletTransaction_DIV')">TRANSASTION</a>
         </div>
     </li>
@@ -18,7 +19,7 @@
     <li class="dropdown"><a class="dropbtn" href="#news" onclick="activateMenuDiv('test_Div3')">SPONSOR COIN</a>
         <div class="dropdown-content">
             <a class="dropbtn" href="javascript:void(0)"
-            onclick="popUpWindowCenter('popup_SC_accounts_DIVV')">ACCOUNT MANAGER POPUP</a>
+            onclick="popUpWindowCenter('popup_SC_assets_DIVV')">ACCOUNT MANAGER POPUP</a>
             <a href="#" onclick="activateMenuDiv('scManager_Div')">SPONSOR COIN MANAGER</a>
             <a href="#news" onclick="activateMenuDiv('rebase_Div')">REBASE MANAGER</a>
             <a href="#" onclick="activateMenuDiv('test_Div4')">PURCHASE APP</a>

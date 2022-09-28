@@ -16,35 +16,39 @@ function addressFound(addr) {
 
 function addTableRow(tableId, addrKey) {
   validateConnection();
-  wallet = connection.getWallet();
+  wallet = connection.getValidWallet();
   if (!addressFound(addrKey)) {
     tm = wallet.tm;
     var contract = tm.getTokenProperty(addrKey, "contract");
     addressMap.set(addrKey, contract);
-    var table = document.getElementById(tableId);
-    var tokenSymbol = tm.getTokenProperty(addrKey, "symbol");
+    var symbol = tm.getTokenProperty(addrKey, "symbol");
     var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
     var decimals = tm.getTokenProperty(addrKey, "decimals");
-    var row = table.insertRow(1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    cell1.innerHTML = tokenSymbol;
-    cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+tokenSymbol+"')\">"+tokenSymbol+"</a>"
-    cell2.innerHTML =  weiToAmount(balanceOf, decimals);;
+    var amount = weiToAmount(balanceOf, decimals);
+    insertTableRow(tableId, symbol, amount);
     return true;
   }
   return false;
 }
 
-function populateContractProperties(tokenSymbol) {
+function insertTableRow(tableId, symbol, amount) {
+  var table = document.getElementById(tableId);
+  var row = table.insertRow(1);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = symbol;
+  cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+symbol+"')\">"+symbol+"</a>"
+  cell2.innerHTML = amount;
+}
+
+function populateContractProperties(symbol) {
   validateConnection();
-  var wallet = connection.getWallet();
+  var wallet = connection.getValidWallet();
   var tm = wallet.tm;
   var addressKey;
   for (let [addrKey] of tm.tokenMapObjects) {
     var searchSymbol = tm.getTokenProperty(addrKey, "symbol");
-   
-    if (tokenSymbol == searchSymbol) {
+    if (symbol == searchSymbol) {
       addressKey = addrKey;
       setContractProperties(addressKey)
       break;
