@@ -14,33 +14,6 @@ function addressFound(addr) {
   return addressMap.get(addr) == undefined ? false : true;
 }
 
-function addTableRow(tableId, addrKey) {
-  validateConnection();
-  wallet = connection.getValidWallet();
-  if (!addressFound(addrKey)) {
-    tm = wallet.tm;
-    var contract = tm.getTokenProperty(addrKey, "contract");
-    addressMap.set(addrKey, contract);
-    var symbol = tm.getTokenProperty(addrKey, "symbol");
-    var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
-    var decimals = tm.getTokenProperty(addrKey, "decimals");
-    var amount = weiToAmount(balanceOf, decimals);
-    insertTableRow(tableId, symbol, amount);
-    return true;
-  }
-  return false;
-}
-
-function insertTableRow(tableId, symbol, amount) {
-  var table = document.getElementById(tableId);
-  var row = table.insertRow(1);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  cell1.innerHTML = symbol;
-  cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+symbol+"')\">"+symbol+"</a>"
-  cell2.innerHTML = amount;
-}
-
 function populateContractProperties(symbol) {
   validateConnection();
   var wallet = connection.getValidWallet();
@@ -99,7 +72,7 @@ function sortTable(tableId, colIdx) {
     rows = table.rows;
     /*Loop through all table rows (except the
       first, which contains table headers):*/
-    for (i = 1; i < rows.length - 1; i++) {
+    for (i = 2; i < rows.length - 1; i++) {
       //start by saying there should be no switching:
       shouldSwitch = false;
       /*Get the two elements you want to compare,
@@ -134,4 +107,33 @@ function loadColumnValuesAsSet(tableId, colIdx) {
     columnValueSet.add(cellValue);
   }
   return columnValueSet;
+}
+
+function addTableRow(tableId, addrKey) {
+  validateConnection();
+  wallet = connection.getValidWallet();
+  if (!addressFound(addrKey)) {
+    tm = wallet.tm;
+    var contract = tm.getTokenProperty(addrKey, "contract");
+    addressMap.set(addrKey, contract);
+    var symbol = tm.getTokenProperty(addrKey, "symbol");
+    var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
+    var decimals = tm.getTokenProperty(addrKey, "decimals");
+    var amount = weiToAmount(balanceOf, decimals);
+    insertTableRow(tableId, symbol, amount);
+    return true;
+  }
+  return false;
+}
+
+function insertTableRow(tableId, symbol, amount, row) {
+  if (row == undefined)
+    row = 2;
+  var table = document.getElementById(tableId);
+  var row = table.insertRow(row);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  cell1.innerHTML = symbol;
+  cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+symbol+"')\">"+symbol+"</a>"
+  cell2.innerHTML = amount;
 }

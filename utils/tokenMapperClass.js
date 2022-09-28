@@ -13,7 +13,7 @@ class TokenMap {
     return tokenKeys;
   }
 
-  getContracts() {
+  getContractSet() {
     var tokenKeys = this.getTokenKeys();
     return new Set(tokenKeys);
   }

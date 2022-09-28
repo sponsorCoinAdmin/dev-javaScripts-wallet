@@ -1,7 +1,7 @@
 var connection;
 function getValidWallet(_walletName) {
   connection = connection == undefined ? new Connection(_walletName) : connection;
-  return connection.getAvailableWallet(_walletName);
+  return connection.getValidWallet(_walletName);
 }
 
 function getConnection(_walletName) {
@@ -25,11 +25,11 @@ class Connection {
     return this.wallet == undefined ? false : true;
   }
 
-  getValidWallet() {
+  getWallet() {
     return this.wallet;
   }
 
-  getAvailableWallet(_walletName) {
+  getValidWallet(_walletName) {
     this.validateWalletName(_walletName);
 //  if (!this.connected() || !(this.wallet.walletName != _walletName))
     if (!this.connected())
@@ -75,10 +75,16 @@ class Wallet {
       this.network_name  = this.network.name;
       this.balance = await this.signer.getBalance();
       this.ethBalance = await this.getEthereumAccountBalance();
+      var ethAmount = this.getEthAmount();
+      insertTableRow("assetsTable", this.symbol, ethAmount, 1);
      } catch (err) {
       processError(err);
       throw err;
     }
+  }
+
+  getEthAmount() {
+    return  weiToAmount(this.balance, this.decimals);
   }
 
   dump() {
@@ -242,12 +248,15 @@ class Wallet {
     }
   }
 
+  getContractSet() {
+    return this.tm.getContractSet();
+  }
+
   setTokenProperty(_address, _propertyKey, _propertyValue) {
     this.tm.setTokenProperty(_address, _propertyKey, _propertyValue);
   }
 
 }
-
 
 function connectMetaMask() {
   try {

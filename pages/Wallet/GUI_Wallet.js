@@ -150,11 +150,8 @@ function activateDiv(menuId, elementClass) {
 function GUI_loadContractsFromWallet(_wallet) {
   try {
     validateConnection();
-    var tableId = "assets_DIV";
     var wallet = getValidWallet(_wallet);
-    var tm = wallet.tm;
-    var keys = tm.getTokenKeys();
-    var contracts = tm.getContracts();
+    var contracts = wallet.getContractSet();
     for (const addr of contracts.values()) {
       addContractAddress(addr);
     }
