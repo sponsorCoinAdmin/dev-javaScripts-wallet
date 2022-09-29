@@ -58,6 +58,7 @@ class Wallet {
       this.name = "Ethereum";
       this.symbol = "ETH";
       this.tm = new TokenMap();
+      this.tc = new TableClass();
     } catch (err) {
       processError(err);
     }

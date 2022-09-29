@@ -31,6 +31,10 @@ class TokenMap {
     return null;
   }
 
+  deleteMapEntry(_key) {
+    this.tokenMapObjects.delete(_key);
+  }
+
   addNewAddressMapObject(_address) {
     var objMap = new Map();
     objMap.set("address", _address)

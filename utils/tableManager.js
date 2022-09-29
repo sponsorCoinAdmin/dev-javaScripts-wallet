@@ -1,3 +1,8 @@
+class TableClass {
+  constructor() {
+   }
+}
+
 var addressMap = new Map([]);
 
 function mapWalletToTable(wallet) {
@@ -109,6 +114,7 @@ function loadColumnValuesAsSet(tableId, colIdx) {
   return columnValueSet;
 }
 
+
 function addTableRow(tableId, addrKey) {
   validateConnection();
   wallet = connection.getValidWallet();
@@ -163,7 +169,7 @@ function deleteRow(elem) {
   try {
     var row = elem.parentNode.parentNode;
     var table = elem.parentNode.parentNode.parentNode;
-
+   
     //this gives id of tr whose button was clicked
     var cells = row.getElementsByTagName("td");
 
@@ -171,7 +177,12 @@ function deleteRow(elem) {
     var holdings = cells[1].innerHTML;
     var address = cells[2].innerHTML;
 
-    alert("Symbol: " + symbol + "\nHoldings: " + holdings + "\nAddress: " + address);
+    // remove address from tm
+    var wallet = connection.getValidWallet();
+    var tm = wallet.tm;
+    tm.deleteMapEntry(address);
+
+  //  alert("Symbol: " + symbol + "\nHoldings: " + holdings + "\nAddress: " + address);
     table.removeChild(row); // remove the row
 
   } catch (err) {
