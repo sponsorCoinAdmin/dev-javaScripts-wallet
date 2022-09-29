@@ -71,7 +71,7 @@ class Wallet {
       this.network = await this.provider.getNetwork();
       this.balance = await this.signer.getBalance();
       this.ethBalance = await this.getEthereumAccountBalance();
-      insertTableRow("assetsTable", this.symbol, this.getEthAmount(), 1);
+      insertTableRow("assetsTable", this.symbol, this.getEthAmount(), this.address, 1);
      } catch (err) {
       processError(err);
       throw err;

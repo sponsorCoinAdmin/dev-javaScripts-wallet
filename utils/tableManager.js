@@ -120,21 +120,76 @@ function addTableRow(tableId, addrKey) {
     var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
     var decimals = tm.getTokenProperty(addrKey, "decimals");
     var amount = weiToAmount(balanceOf, decimals);
-    insertTableRow(tableId, symbol, amount);
+    insertTableRow(tableId, symbol, amount, addrKey, 2);
     return true;
   }
   return false;
 }
 
-function insertTableRow(tableId, symbol, amount, row) {
+function insertTableRow(tableId, symbol, amount, addrKey, row) {
   if (row == undefined) row = 2;
   var table = document.getElementById(tableId);
+
   var row = table.insertRow(row);
-  var cell1 = row.insertCell(0);
-  var cell2 = row.insertCell(1);
-  cell1.innerHTML = symbol;
-  cell1.innerHTML = "<a href=\"#\" onclick=\"populateContractProperties('"+symbol+"')\">"+symbol+"</a>"
-  cell2.innerHTML = amount;
+
+  var cell0 = row.insertCell(0);
+  cell0.className = symbol + "_CELL";
+  cell0.innerHTML =
+    '<a href="#" onclick="populateContractProperties(\'' + symbol + "')\">" + symbol + "</a>";
+
+  var cell1 = row.insertCell(1);
+  cell1.className = "holdings" + "_CELL";
+  cell1.innerHTML = amount;
+
+  // var cell2 = row.insertCell(2);
+  // cell2.className = "address" + "_CELL";
+  // cell2.innerHTML = addrKey;
+
+  var trash = '<img src="/images/icon-trash.png" height=25 width=25></img>';
+
+  var cell3 = row.insertCell(2);
+  cell3.className = "delete" + "_CELL";
+  cell3.innerHTML = "<a href=\"#\" onclick=\"show(this)\">" + trash + "</a>";
+
+  var cell4 = row.insertCell(3);
+  cell4.className = "delete" + "_CELL";
+  // cell4.innerHTML = "<a href=\"#\" onclick=\"show(" + this + ")\">" + trash + "</a>";
+  cell4.innerHTML = "<button onclick=\"deleteRow(this)\">delete</button>";
+}
+
+function deleteRow(elem) {
+  var table = elem.parentNode.parentNode.parentNode;
+  var rowCount = table.rows.length;
+
+  if(rowCount === 1) {
+    alert('Cannot delete the last row');
+    return;
+  }
+
+  // get the "<tr>" that is the parent of the clicked button
+  var row = elem.parentNode.parentNode; 
+  row.parentNode.removeChild(row); // remove the row
+}
+
+function show(elem) {
+  try {
+    var row = elem.parentNode.parentNode;
+    var table = elem.parentNode.parentNode.parentNode;
+    table.removeChild(row); // remove the row
+
+    //this gives id of tr whose button was clicked
+    var data = document.getElementById(rowId).querySelectorAll(".row-data");
+    /*returns array of all elements with 
+"row-data" class within the row with given id*/
+
+    var symbol = data[0].innerHTML;
+    var holdings = data[1].innerHTML;
+    var address = data[2].innerHTML;
+
+    alert("Name: " + name + "\nAge: " + age);
+  } catch (err) {
+    alertLogErrorMessage(err);
+  }
 }
 
 function deleteTableRows(tableId) {
@@ -146,6 +201,5 @@ function deleteTableRows(tableId) {
 
 function deleteTableRow(tableId, rowId) {
   var table = document.getElementById(tableId);
-    table.deleteRow(rowId);
-  }
+  table.deleteRow(rowId);
 }
