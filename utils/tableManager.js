@@ -131,62 +131,49 @@ function insertTableRow(tableId, symbol, amount, addrKey, row) {
   var table = document.getElementById(tableId);
 
   var row = table.insertRow(row);
+  var cell_Idx = 0;
 
-  var cell0 = row.insertCell(0);
+  var cell0 = row.insertCell(cell_Idx++);
   cell0.className = symbol + "_CELL";
   cell0.innerHTML =
-    '<a href="#" onclick="populateContractProperties(\'' + symbol + "')\">" + symbol + "</a>";
+    '<a href="#" onclick="populateContractProperties(\'' +
+    symbol +
+    "')\">" +
+    symbol +
+    "</a>";
 
-  var cell1 = row.insertCell(1);
+  var cell1 = row.insertCell(cell_Idx++);
   cell1.className = "holdings" + "_CELL";
   cell1.innerHTML = amount;
 
-  // var cell2 = row.insertCell(2);
-  // cell2.className = "address" + "_CELL";
-  // cell2.innerHTML = addrKey;
+  var cell2 = row.insertCell(cell_Idx++);
+  cell2.className = "address" + "_CELL";
+  cell2.className = "address" + "_CELL";
+  cell2.innerHTML = addrKey;
 
   var trash = '<img src="/images/icon-trash.png" height=25 width=25></img>';
-
-  var cell3 = row.insertCell(2);
+  var cell3 = row.insertCell(cell_Idx++);
   cell3.className = "delete" + "_CELL";
-  cell3.innerHTML = "<a href=\"#\" onclick=\"show(this)\">" + trash + "</a>";
+  cell3.innerHTML = '<a href="#" onclick="deleteRow(this)">' + trash + "</a>";
 
-  var cell4 = row.insertCell(3);
-  cell4.className = "delete" + "_CELL";
-  // cell4.innerHTML = "<a href=\"#\" onclick=\"show(" + this + ")\">" + trash + "</a>";
-  cell4.innerHTML = "<button onclick=\"deleteRow(this)\">delete</button>";
+  hide_show_table("address_CELL", "hide");
 }
 
 function deleteRow(elem) {
-  var table = elem.parentNode.parentNode.parentNode;
-  var rowCount = table.rows.length;
-
-  if(rowCount === 1) {
-    alert('Cannot delete the last row');
-    return;
-  }
-
-  // get the "<tr>" that is the parent of the clicked button
-  var row = elem.parentNode.parentNode; 
-  row.parentNode.removeChild(row); // remove the row
-}
-
-function show(elem) {
   try {
     var row = elem.parentNode.parentNode;
     var table = elem.parentNode.parentNode.parentNode;
-    table.removeChild(row); // remove the row
 
     //this gives id of tr whose button was clicked
-    var data = document.getElementById(rowId).querySelectorAll(".row-data");
-    /*returns array of all elements with 
-"row-data" class within the row with given id*/
+    var cells = row.getElementsByTagName("td");
 
-    var symbol = data[0].innerHTML;
-    var holdings = data[1].innerHTML;
-    var address = data[2].innerHTML;
+    var symbol = cells[0].innerHTML;
+    var holdings = cells[1].innerHTML;
+    var address = cells[2].innerHTML;
 
-    alert("Name: " + name + "\nAge: " + age);
+    alert("Symbol: " + symbol + "\nHoldings: " + holdings + "\nAddress: " + address);
+    table.removeChild(row); // remove the row
+
   } catch (err) {
     alertLogErrorMessage(err);
   }
@@ -199,7 +186,20 @@ function deleteTableRows(tableId) {
   }
 }
 
-function deleteTableRow(tableId, rowId) {
-  var table = document.getElementById(tableId);
-  table.deleteRow(rowId);
+function hide_show_table(col_name, status) {
+  // var status=document.getElementById(col_name).value;
+  var all_col = document.getElementsByClassName(col_name);
+  if (status == "hide") {
+    for (var i = 0; i < all_col.length; i++) {
+      all_col[i].style.display = "none";
+    }
+    // document.getElementById(col_name + "_head").style.display = "none";
+    // document.getElementById(col_name).value = "show";
+  } else {
+    for (var i = 0; i < all_col.length; i++) {
+      all_col[i].style.display = "table-cell";
+    }
+    // document.getElementById(col_name + "_head").style.display = "table-cell";
+    // document.getElementById(col_name).value = "hide";
+  }
 }
