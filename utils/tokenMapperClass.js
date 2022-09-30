@@ -18,11 +18,11 @@ class TokenMap {
     return new Set(tokenKeys);
   }
 
-  setTokenProperty(address, propertyKey, propertyValue) {
-    if (!isEmpty(address) && !isEmpty(propertyKey)) {
-      var token = this.tokenMapObjects.get(address);
+  setTokenProperty(_address, propertyKey, propertyValue) {
+    if (!isEmpty(_address) && !isEmpty(propertyKey)) {
+      var token = this.tokenMapObjects.get(_address);
       if (token == null || token == undefined || token == "")
-        token = this.addNewAddressMapObject(address);
+        token = this.addNewAddressMapObject(_address);
       if (token instanceof Map) {
         token.set(propertyKey, propertyValue)
         return token;
@@ -42,44 +42,24 @@ class TokenMap {
     return objMap;
   }
 
-  mapContractToWallet(contract) {
+  mapContractToWallet(_contract) {
     var addressKey = contract.address;
-    this.setTokenProperty(addressKey, "contract",    contract);
-  }
-  
-  mapWalletObjectByAddressKey(walletObj) {
-    var contract = walletObj.contract;
-    var addressKey = walletObj.address;
-    var name = walletObj.name;
-    var symbol = walletObj.symbol;
-    var totalSupply = walletObj.totalSupply;
-    var decimals = walletObj.decimals;
-    var tokenSupply = walletObj.tokenSupply;
-
-    this.setTokenProperty(addressKey, "contract",    contract);
-    this.setTokenProperty(addressKey, "name",        name);
-    this.setTokenProperty(addressKey, "symbol",      symbol);
-    this.setTokenProperty(addressKey, "totalSupply", totalSupply);
-    this.setTokenProperty(addressKey, "decimals",    decimals);
-    this.setTokenProperty(addressKey, "tokenSupply", tokenSupply);
-    
-    var contractMap = this.get(addressKey);
-    return this.getTokenMapValues(addressKey);
+    this.setTokenProperty(addressKey, "contract", _contract);
   }
 
-  getTokenProperty(address, propertyKey) {
+  getTokenProperty(_address, propertyKey) {
     var propertyValue = null;
-    var tokenMap = this.getTokenMapValues(address)
+    var tokenMap = this.getTokenMapValues(_address)
     if (tokenMap != null && !isEmpty(propertyKey)) {
       propertyValue = tokenMap.get(propertyKey);
     }
     return propertyValue;
   }
   
-  getTokenMapValues(address) {
+  getTokenMapValues(_address) {
     var tokenMap;
-    if (!isEmpty(address)) {
-      tokenMap = this.tokenMapObjects.get(address);
+    if (!isEmpty(_address)) {
+      tokenMap = this.tokenMapObjects.get(_address);
     }
     return tokenMap;
   }

@@ -1,9 +1,7 @@
-class TableClass {
+class TableManagerClass {
   constructor() {
    }
 }
-
-var addressMap = new Map([]);
 
 function mapWalletToTable(wallet) {
   mapTokensToTable(wallet.tm, "assetsTable");
@@ -15,9 +13,12 @@ function mapTokensToTable(tm, tableId) {
   }
 }
 
-function addressFound(addr) {
-  return addressMap.get(addr) == undefined ? false : true;
-}
+// ToDo: Check Table Values Instead
+// function addressFound(addr) {
+//   var wallet = connection.getValidWallet();
+//   var tm = wallet.tm;
+//   return tm.getTokenMapValues(addr) == undefined ? false : true;
+// }
 
 function populateContractProperties(symbol) {
   validateConnection();
@@ -118,18 +119,18 @@ function loadColumnValuesAsSet(tableId, colIdx) {
 function addTableRow(tableId, addrKey) {
   validateConnection();
   wallet = connection.getValidWallet();
-  if (!addressFound(addrKey)) {
+//  if (!addressFound(addrKey)) {
     tm = wallet.tm;
     var contract = tm.getTokenProperty(addrKey, "contract");
-    addressMap.set(addrKey, contract);
+//    addressMap.set(addrKey, contract);
     var symbol = tm.getTokenProperty(addrKey, "symbol");
     var balanceOf = tm.getTokenProperty(addrKey, "balanceOf");
     var decimals = tm.getTokenProperty(addrKey, "decimals");
     var amount = weiToAmount(balanceOf, decimals);
     insertTableRow(tableId, symbol, amount, addrKey, 2);
     return true;
-  }
-  return false;
+  // }
+  // return false;
 }
 
 function insertTableRow(tableId, symbol, amount, addrKey, row) {

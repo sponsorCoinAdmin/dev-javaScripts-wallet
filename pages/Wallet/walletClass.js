@@ -58,7 +58,7 @@ class Wallet {
       this.name = "Ethereum";
       this.symbol = "ETH";
       this.tm = new TokenMap();
-      this.tc = new TableClass();
+//      this.tc = new TableClass();
     } catch (err) {
       processError(err);
     }
@@ -161,7 +161,7 @@ class Wallet {
       var contract = new ethers.Contract(_contractAddress, abi, this.signer);
       await this.setContractValues (contract);
 
-      //contractMap = this.tm.mapWalletObjectByAddressKey(contract);
+      contractMap = this.tm.getTokenMapValues(_contractAddress);
     } catch (err) {
       console.log(err);
       var msg = "Token symbol not found: " + this.name + " (" + this.symbol + ")"
@@ -267,14 +267,4 @@ function connectMetaMask() {
     throw err;
   }
   return provider;
-}
-
-async function connectMetamask2() {
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  // MetaMask requires requesting permission to connect users accounts
-  await provider.send("eth_requestAccounts", []);
-
-  signer = await provider.getSigner();
-
-  console.log("Account address is:", await signer.getAddress());
 }
