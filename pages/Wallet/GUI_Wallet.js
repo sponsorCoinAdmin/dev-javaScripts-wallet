@@ -164,8 +164,11 @@ async function addContractAddress(addrKey) {
   try {
     validateConnection();
     var wallet = getValidWallet();
-    contractMap = await wallet.getContractMapByAddressKey(addrKey);
-    addTableRow("assetsTable", addrKey);
+    var tm = wallet.tm;
+    if (tm.getTokenMapValues(addrKey) == undefined) {
+      contractMap = await wallet.getContractMapByAddressKey(addrKey);
+      addTableRow("assetsTable", addrKey);
+    }
   } catch (err) {
     alertLogError(err, addrKey);
   }
