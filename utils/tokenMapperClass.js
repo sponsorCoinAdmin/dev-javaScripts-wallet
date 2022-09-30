@@ -50,11 +50,24 @@ class TokenMap {
   getTokenProperty(_address, propertyKey) {
     var propertyValue = null;
     var tokenMap = this.getTokenMapValues(_address)
-    if (tokenMap != null && !isEmpty(propertyKey)) {
+    if (tokenMap != undefined) {
       propertyValue = tokenMap.get(propertyKey);
     }
     return propertyValue;
   }
+
+  deleteTokenProperty(_address, propertyKey) {
+    var tokenMap = this.getTokenMapValues(_address)
+    if (tokenMap != undefined) {
+      tokenMap.remove(propertyKey);
+      return true;
+    }
+    return false;
+  }
+
+  tokenExists(_address) {
+    return this.tokenMapObjects.get(_address) == null ? false : true;;
+   }
   
   getTokenMapValues(_address) {
     var tokenMap;

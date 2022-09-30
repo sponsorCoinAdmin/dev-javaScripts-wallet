@@ -122,14 +122,6 @@ class Wallet {
     return walletMapValues;
   }
 
-  getTokenMapValues(tokenMapValues) {
-    let text = "";
-    for (const x of tokenMapValues.entries()) {
-      text += x + "\n";
-    }
-    return text;
-  }
-
   async getEthereumAccountBalance() {
     const decimals = 1e18;
     var ethbalance;
@@ -143,7 +135,7 @@ class Wallet {
     return ethbalance;
   }
    
-  async getContractMapByAddressKey(_addressKey) {
+  async getValidTokenContract(_addressKey) {
     var contractMap = this.tm.getTokenMapValues(_addressKey);
 
     // check if contract exists
@@ -160,7 +152,6 @@ class Wallet {
       var abi = _ABI == undefined ? SPCOIN_ABI : _ABI;
       var contract = new ethers.Contract(_contractAddress, abi, this.signer);
       await this.setContractValues (contract);
-
       contractMap = this.tm.getTokenMapValues(_contractAddress);
     } catch (err) {
       console.log(err);
@@ -201,6 +192,10 @@ class Wallet {
     this.setTokenProperty(contractAddressKey, "decimals",    decimals);
     this.setTokenProperty(contractAddressKey, "tokenSupply", tokenSupply);
     this.setTokenProperty(contractAddressKey, "balanceOf",   balanceOf);
+  }
+
+  tokenExists(_address) {
+    return this.tm.tokenExists(_address);
   }
 
   connectValidWalletProvider(_walletName) {

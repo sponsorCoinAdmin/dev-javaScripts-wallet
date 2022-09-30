@@ -15,9 +15,8 @@ function mapTokensToTable(tm, tableId) {
 
 // ToDo: Check Table Values Instead
 // function addressFound(addr) {
-//   var wallet = connection.getValidWallet();
-//   var tm = wallet.tm;
-//   return tm.getTokenMapValues(addr) == undefined ? false : true;
+//  var wallet = connection.getValidWallet();
+//  return wallet.tokenExists(addrKey);
 // }
 
 function populateContractProperties(symbol) {
@@ -33,7 +32,7 @@ function populateContractProperties(symbol) {
       break;
     }
   }
-  activateWalletBodyDiv("contract_DIV");
+  activateWalletBodyDiv("walletContract_DIV");
 }
 
 function setContractProperties(addressKey) {
@@ -52,7 +51,7 @@ function setContractProperties(addressKey) {
 
   var contract = tm.getTokenProperty(addressKey, "contract");
   getAccountBalanceOf(contract, contractAddress, "accountBalanceOf_TX");
-  activateWalletBodyDiv("contract_DIV");
+  activateWalletBodyDiv("walletContract_DIV");
 }
 
 function addNewTestToken(tableId) {

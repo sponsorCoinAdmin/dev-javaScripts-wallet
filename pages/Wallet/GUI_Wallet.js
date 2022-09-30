@@ -138,7 +138,7 @@ function activateDiv(menuId, elementClass) {
     validateConnection()
     var contracts = loadColumnValuesAsSet(tableId, colIdx);
     for (const addr of contracts.values()) {
-      //contractMap = await wallet.getContractMapByAddressKey(addrKey);
+      //contractMap = await wallet.getValidTokenContract(addrKey);
 
       addContractAddress(addr);
     }
@@ -164,9 +164,8 @@ async function addContractAddress(addrKey) {
   try {
     validateConnection();
     var wallet = getValidWallet();
-    var tm = wallet.tm;
-    if (tm.getTokenMapValues(addrKey) == undefined) {
-      contractMap = await wallet.getContractMapByAddressKey(addrKey);
+    if (!wallet.tokenExists(addrKey)) {
+      contractMap = await wallet.getValidTokenContract(addrKey);
       addTableRow("assetsTable", addrKey);
     }
   } catch (err) {
