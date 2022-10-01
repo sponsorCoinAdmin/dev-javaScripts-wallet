@@ -163,13 +163,13 @@ class Wallet {
     return contractMap;
   }
 
-  async setContractValues (contract) {
-    var contractAddressKey = contract.address;
+  async setContractValues (_contract) {
+    var contractAddressKey = _contract.address;
     var values = await Promise.all([
-      contract.name(),
-      contract.symbol(),
-      contract.totalSupply(),
-      contract.decimals(),
+      _contract.name(),
+      _contract.symbol(),
+      _contract.totalSupply(),
+      _contract.decimals(),
     ]);
     console.log(values);
     var name = values[0];
@@ -177,7 +177,7 @@ class Wallet {
     var totalSupply = values[2];
     var decimals = values[3];
     var tokenSupply = weiToAmount(totalSupply, decimals);
-    var balanceOf = await contract.balanceOf(this.address);
+    var balanceOf = await _contract.balanceOf(this.address);
 
     var outputStr = "name = " + name + "\n";
     outputStr += " symbol " + symbol + "\n";
@@ -185,7 +185,7 @@ class Wallet {
     outputStr += " decimals " + decimals + "\n";
     outputStr += " balanceOf " + balanceOf + "\n";
     console.log("Loaded Token\n" + outputStr);
-    this.setTokenProperty(contractAddressKey, "contract",    contract);
+    this.setTokenProperty(contractAddressKey, "contract",    _contract);
     this.setTokenProperty(contractAddressKey, "name",        name);
     this.setTokenProperty(contractAddressKey, "symbol",      symbol);
     this.setTokenProperty(contractAddressKey, "totalSupply", totalSupply);

@@ -33,6 +33,10 @@
       <input type="text" id="sendToAccountAddr_TX" />
     </div>
     <div id="walletContract_DIV" class="walletBodyContainer">
+      <button id="callBuyPage_BTN" onclick="activateWalletBodyDiv('buy_DIV')">Buy</button>
+      <button id="callSellPage_BTN" onclick="activateWalletBodyDiv('sell_DIV')">Sell</button>
+      <button id="callSendPage_BTN" onclick="activateWalletBodyDiv('send_DIV')">Send</button>
+
       <H2 id="Contract_Header" class="text-center"><b>Contract Symbol</b></H2>
 
       <label id="contractAddress_LBL"><b>Token Address</b></label>
@@ -61,6 +65,19 @@
         </tr>
       </table>
     </div>
+
+    <div id="buy_DIV" class="walletBodyContainer">
+      <button id="buy_BTN" onclick="activateWalletBodyDiv('buy_DIV')">Buy</button>
+    </div>
+
+    <div id="Sell_DIV" class="walletBodyContainer">
+      <button id="sell_BTN" onclick="activateWalletBodyDiv('sell_DIV')">Sell</button>
+    </div>
+    
+    <div id="Send_DIV" class="walletBodyContainer">
+       <button id="send_BTN" onclick="activateWalletBodyDiv('send_DIV')">Send</button>
+    </div>
+
   </div>
 
   <button type="button" class="btn cancel" onclick="GUI_ClosePopupWallet()">Close Wallet</button>

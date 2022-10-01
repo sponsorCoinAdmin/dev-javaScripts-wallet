@@ -23,7 +23,7 @@ function GUI_initPage() {
 }
 
 // 1. Connect Metamask with Dapp
-async function GUI_connectWallet(id, _walletName) {
+async function GUI_connectWallet(_id, _walletName) {
   try {
     var wallet = getValidWallet(_walletName);
 
@@ -37,7 +37,7 @@ async function GUI_connectWallet(id, _walletName) {
     var headerText2=document.getElementById("header2_SPAN");
     headerText2.textContent ="Account:"+wallet.address;
   } catch (err) {
-    alertLogError(err, id);
+    alertLogError(err, _id);
     document.getElementById("ethereumAccountBalance_TX").value = "";
   }
 }
@@ -56,17 +56,17 @@ async function GUI_AddTokenContract(id) {
 }
 
 
-async function GUI_getActiveAccount(id) {
+async function GUI_getActiveAccount(_id) {
   try {
     // MetaMask requires requesting permission to connect users accounts
     validateConnection();
     accountAddress = await wallet.getActiveAccount();
     //    accountAddress = await getActiveAccount(signer);
-    document.getElementById(id.replace("_BTN", "_TX")).value = accountAddress;
-    changeElementIdColor(id, "green");
+    document.getElementById(_id.replace("_BTN", "_TX")).value = accountAddress;
+    changeElementIdColor(_id, "green");
   } catch (err) {
-    document.getElementById(id.replace("_BTN", "_TX")).value = "";
-    alertLogError(err, id);
+    document.getElementById(_id.replace("_BTN", "_TX")).value = "";
+    alertLogError(err, _id);
   }
 }
 
@@ -79,14 +79,14 @@ function GUI_ClosePopupWallet() {
   document.getElementById("walletPopup_Div").style.display = "none";
 }
 
-async function getAccountBalanceOf(contract, contractAddress, id_TX) {
-  var element = document.getElementById(id_TX);
-  var promiseBalanceOf = await contract.balanceOF(contractAddress);
-  id_TX.value = promiseBalanceOf.value();
+async function getAccountBalanceOf(_contract, _contractAddress, _id_TX) {
+  var element = document.getElementById(_id_TX);
+  var promiseBalanceOf = await _contract.balanceOF(_contractAddress);
+  _id_TX.value = promiseBalanceOf.value();
 }
 
-function toggleById(id) {
-  element = document.getElementById(id);
+function toggleById(_id) {
+  element = document.getElementById(_id);
   if (element.style.display == "block") {
     element.style.display = "none";
   } else {
@@ -94,49 +94,49 @@ function toggleById(id) {
   }
 }
 
-function hideElementById(id) {
-    element = document.getElementById(id);
+function hideElementById(_id) {
+    element = document.getElementById(_id);
     element.style.display = "none";
 }
 
-function showElementById(id) {
-  element = document.getElementById(id);
+function showElementById(_id) {
+  element = document.getElementById(_id);
   element.style.display = "block";
 }
 
-function hideElementsByClass(className) {
-  var selectedClasses = document.getElementsByClassName(className);
+function hideElementsByClass(_className) {
+  var selectedClasses = document.getElementsByClassName(_className);
   for (var i = 0; i < selectedClasses.length; i++) {
     selectedClasses[i].style.display = "none";
   }
 }
 
-function showElementsByClass(className) {
-  var selectedClasses = document.getElementsByClassName(className);
+function showElementsByClass(_className) {
+  var selectedClasses = document.getElementsByClassName(_className);
   for (var i = 0; i < selectedClasses.length; i++) {
     selectedClasses[i].style.display = "block";
   }
 }
 
-function activateMenuDiv(menuId) {
+function activateMenuDiv(_menuId) {
   hideElementsByClass("menu_Class");
-  showElementById(menuId);
+  showElementById(_menuId);
 }
 
-function activateWalletBodyDiv(walletId) {
+function activateWalletBodyDiv(_walletId) {
   var elementClass = "walletBodyContainer";
-  activateDiv(walletId, elementClass);
+  activateDiv(_walletId, elementClass);
 }
 
-function activateDiv(menuId, elementClass) {
-   hideElementsByClass(elementClass);
-   showElementById(menuId);
+function activateDiv(_menuId, _elementClass) {
+   hideElementsByClass(_elementClass);
+   showElementById(_menuId);
  }
 
- function GUI_loadContractsFromTable(tableId, colIdx) {
+ function GUI_loadContractsFromTable(_tableId, _colIdx) {
   try {
     validateConnection()
-    var contracts = loadColumnValuesAsSet(tableId, colIdx);
+    var contracts = loadColumnValuesAsSet(_tableId, _colIdx);
     for (const addr of contracts.values()) {
       //contractMap = await wallet.getValidTokenContract(addrKey);
 
@@ -160,16 +160,16 @@ function GUI_loadContractsFromWallet(_wallet) {
   }
 }
 
-async function addContractAddress(addrKey) {
+async function addContractAddress(_addrKey) {
   try {
     validateConnection();
     var wallet = getValidWallet();
-    if (!wallet.tokenExists(addrKey)) {
-      contractMap = await wallet.getValidTokenContract(addrKey);
-      addTableRow("assetsTable", addrKey);
+    if (!wallet.tokenExists(_addrKey)) {
+      contractMap = await wallet.getValidTokenContract(_addrKey);
+      addTableRow("assetsTable", _addrKey);
     }
   } catch (err) {
-    alertLogError(err, addrKey);
+    alertLogError(err, _addrKey);
   }
   return contractMap;
 }
