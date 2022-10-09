@@ -94,3 +94,7 @@ function setWindowCentre(id) {
   popupDiv.style.top = "60px";
   popupDiv.style.right = leftWindowMargin+"px";
 }
+
+function sleep(milliseconds) {
+  return new Promise(resolvePromise => setTimeout(resolvePromise, milliseconds));
+}

@@ -87,6 +87,10 @@ H2 {
   font-family: Helvetica;
 }
 
+.center {
+	float: right;
+}
+
 
 /* Set a style for the submit/login button */
 .btn {

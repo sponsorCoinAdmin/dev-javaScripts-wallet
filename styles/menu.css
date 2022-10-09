@@ -67,3 +67,8 @@ ul {
       display: none;
   }
   
+  .pagination {
+    left: 50%; /* left-align your element to center */
+    transform: translateX(-50%); /* offset left by half the width of your element */
+    position: absolute; /* use or dont' use depending on element parent */
+  }

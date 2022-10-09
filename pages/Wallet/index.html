@@ -8,7 +8,6 @@
     </div>
     <div class="buttons">
       <button id="accountData" onclick="activateWalletBodyDiv('assets_DIV')">Assets</button>
-      <button id="inportToken" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
       <button id="send_BTN" onclick="activateWalletBodyDiv('walletTransaction_DIV')">Transactions</button>
       <button type="button" onclick="GUI_loadContractsFromTable('testTable', 2)">Load Test Data</button>
     </div>
@@ -64,17 +63,15 @@
           <th class="delete_CELL">Remove</th>
         </tr>
       </table>
+      <button id="inportToken" class="pagination" onclick="activateWalletBodyDiv('inportTokens_DIV')">Inport Token</button>
     </div>
-
     <div id="buy_DIV" class="walletBodyContainer">
       <button id="buy_BTN" onclick="activateWalletBodyDiv('buy_DIV')">Buy</button>
     </div>
-
-    <div id="Sell_DIV" class="walletBodyContainer">
+    <div id="sell_DIV" class="walletBodyContainer">
       <button id="sell_BTN" onclick="activateWalletBodyDiv('sell_DIV')">Sell</button>
     </div>
-    
-    <div id="Send_DIV" class="walletBodyContainer">
+    <div id="send_DIV" class="walletBodyContainer">
        <button id="send_BTN" onclick="activateWalletBodyDiv('send_DIV')">Send</button>
     </div>
 
